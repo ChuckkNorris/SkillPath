@@ -1,0 +1,7 @@
+<div>
+    {{hello}}
+    <ux-button (click)="dostuff()" [icon]="'send'" [text]="'Submit'"></ux-button>
+    <ux-text [(text)]="user.username" [icon]="'account_circle'" [label]="'Username'"></ux-text>
+    <ux-text [(text)]="user.password" [icon]="'vpn_key'" [label]="'Password'"></ux-text>
+    <ux-dropdown></ux-dropdown>
+</div>

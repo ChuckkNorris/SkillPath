@@ -1,0 +1,17 @@
+<nav class="red darken-4">
+    <div class="nav-wrapper">
+        <a href="#!" class="brand-logo">
+            <!--<img src="./assets/skill-path-logo.png" alt="">-->
+        </a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li [class.active]="routeIsActive('/')"><a [routerLink]="['/']" >Learn</a></li>
+            <li [class.active]="routeIsActive('Teach')"><a [routerLink]="['Teach']" >Teach</a></li>
+        </ul>
+        <!--<ul class="side-nav" id="mobile-demo">
+            <li [class.active]="routeIsActive('/')"><a [routerLink]="['/']" >Learn</a></li>
+            <li [class.active]="routeIsActive('/Teach')"><a [routerLink]="['/Teach']" >Teach</a></li>
+        </ul>-->
+    </div>
+</nav>
+<router-outlet></router-outlet>

@@ -1,0 +1,11 @@
+export { AppComponent } from './app.component';
+export { ComponentTemplate } from './COMPONENT-TEMPLATE/component';
+export { UxButton } from './CONTROLS/buttons/ux-button';
+export { UxDropdown } from './CONTROLS/forms/ux-dropdown';
+export { UxText } from './CONTROLS/forms/ux-text';
+export { UserModel } from './MODELS/user.model';
+export { LearnPage } from './PAGES/learn-page/learn.page';
+export { TeachPage } from './PAGES/teach-page/teach.page';
+export { FireService } from './SERVICES/fire.service';
+export { FirebaseService } from './SERVICES/firebase.service';
+export { UserService } from './SERVICES/user.service';
