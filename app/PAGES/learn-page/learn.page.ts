@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {UserService} from '../../SERVICES/user.service';
-import {  UserModel } from '../../export';
+import { UserModel } from '../../export';
 
 
 @Component({

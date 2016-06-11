@@ -1,9 +1,13 @@
 export { AppComponent } from './app.component';
 export { ComponentTemplate } from './COMPONENT-TEMPLATE/component';
 export { UxButton } from './CONTROLS/buttons/ux-button';
+export { UxCard } from './CONTROLS/cards/ux-card';
+export { UxContainer } from './CONTROLS/containers/ux-container';
 export { UxDropdown } from './CONTROLS/forms/ux-dropdown';
 export { UxText } from './CONTROLS/forms/ux-text';
+export { SpCheckpointThumbnail } from './CONTROLS/skill-path/sp-checkpoint-thumbnail';
 export { UserModel } from './MODELS/user.model';
+export { CheckpointPage } from './PAGES/checkpoint-page/checkpoint-page';
 export { LearnPage } from './PAGES/learn-page/learn.page';
 export { TeachPage } from './PAGES/teach-page/teach.page';
 export { FireService } from './SERVICES/fire.service';
