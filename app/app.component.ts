@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Routes, Router, ROUTER_DIRECTIVES } from '@angular/router';
-import { LearnPage, TeachPage } from './export';
+import { LearnPage, TeachPage, CheckpointPage } from './export';
 import {UserService} from './SERVICES/user.service';
 
 @Component({
@@ -14,7 +14,8 @@ import {UserService} from './SERVICES/user.service';
 
 @Routes([
   { path: '/', component: LearnPage },
-  { path: 'Teach', component:  TeachPage}
+  { path: 'Teach', component:  TeachPage},
+  { path: 'checkpoint/:id', component:  CheckpointPage}
 ])
 export class AppComponent implements OnInit {
   
@@ -24,7 +25,10 @@ export class AppComponent implements OnInit {
     // Enable Mobile Menu
     $(".button-collapse").sideNav();
     $('select').material_select();
+    
   }
+
+  
 
   routeIsActive(routePath: string) {
      let currentRoute = this.router.urlTree.firstChild(this.router.urlTree.root);

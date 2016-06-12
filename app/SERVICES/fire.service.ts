@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import { Observable, Observer } from 'rxjs/Rx';
+import { Observable, Observer } from 'rxjs/rx';
 
 
 @Injectable()

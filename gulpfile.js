@@ -8,7 +8,7 @@ gulp.task("bundle", function () {
     var builder = new Builder('/', 'systemjs.config.js');
 
     builder
-    .buildStatic('app/bin/main.js', 'outfile.js')
+    .buildStatic('app/bin/main.js', 'bundle.js')
     .then(function() {
     console.log('Build complete');
     })
