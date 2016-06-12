@@ -15,7 +15,7 @@ import {Component, Output, EventEmitter} from '@angular/core';
     `,
     inputs: ['icon', 'label', 'text']
 })
-export class UxText { 
+export class UxSearch { 
     private icon:string = "";
     private label:string = "";
     private text:string = "";

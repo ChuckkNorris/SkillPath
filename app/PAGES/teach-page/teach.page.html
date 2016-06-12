@@ -1,3 +1,7 @@
-<div>
-    Add Candidate?
-</div>
+<ux-container>
+    <ux-text [(text)]="checkpoint.title" [label]="'Checkpoint Title'"></ux-text>
+    <ux-text [(text)]="checkpoint.tutorialUrl" [label]="'Tutorial URL'"></ux-text>
+    <!--<ux-text [(text)]="dog" [label]="'Type Stuff!'"></ux-text>
+    <ux-text [(text)]="dog" [label]="'Type Stuff!'"></ux-text>-->
+    <ux-button (click)="createCheckpoint();" [text]="'Create Checkpoint'" [icon]="'send'"></ux-button>
+</ux-container>

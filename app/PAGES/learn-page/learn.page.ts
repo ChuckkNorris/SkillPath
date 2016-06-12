@@ -1,6 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {UserService} from '../../SERVICES/user.service';
-import { UserModel } from '../../export';
+import {CheckpointService} from '../../SERVICES/checkpoint.service';
+import { UserModel, CheckpointModel } from '../../export';
 
 
 @Component({
@@ -8,21 +9,20 @@ import { UserModel } from '../../export';
     selector: 'learn-page', // GOOD
     templateUrl: 'learn.page.html', // GOOD
     styleUrls: ['learn.page.css'], // GOOD
-    providers: [ UserService] 
+    providers: [ CheckpointService] 
 })
 export class LearnPage {
-    constructor(private service: UserService) {}
-    user:UserModel = new UserModel();
-    hello: string = "You got yourself a login page, sir";
-
-    dostuff() {
-        
-        console.log(this.user);
-        
-        //this.firebaseService.set(this.user);
-
-       // var t = this.firebaseService.get("users/" + this.user.username);
-       // console.log(t);
-        this.service.createUser('test');
+    constructor(private checkpointService: CheckpointService) {
+        checkpointService.getAllCheckpoints().subscribe(what => {
+            console.log(what);
+            var array = $.map(what, function(value, index) {
+                return [value];
+            });
+            this.checkpoints = array as CheckpointModel[];
+        });
     }
+   
+    private checkpoints: CheckpointModel[] = [];
+
+    
 }

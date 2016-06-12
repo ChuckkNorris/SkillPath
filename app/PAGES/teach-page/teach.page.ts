@@ -1,14 +1,21 @@
 import {Component} from '@angular/core';
-import { UserService } from '../../SERVICES/user.service';
+import {  CheckpointService } from '../../SERVICES/checkpoint.service';
+import {CheckpointModel} from '../../export';
 @Component({
     moduleId: 'app/PAGES/teach-page/',
     selector: 'teach-page',
     templateUrl: 'teach.page.html',
-    styleUrls: ['teach.page.css']
+    styleUrls: ['teach.page.css'],
+    providers: [CheckpointService]
 })
 export class TeachPage {
-    constructor(private user: UserService) {
+    constructor(
+        private checkpointService: CheckpointService
+        ) {}
+    private checkpoint: CheckpointModel = new CheckpointModel;
 
+    createCheckpoint() {
+        this.checkpointService.createCheckpoint(this.checkpoint);
     }
-
 }
+

@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter} from '@angular/core';
+import {Component, Output, Input, EventEmitter} from '@angular/core';
 
 @Component({
     selector: 'ux-text',
@@ -12,12 +12,12 @@ import {Component, Output, EventEmitter} from '@angular/core';
             class="validate">
         <label for="uxtext">{{label}}</label>
     </div>
-    `,
-    inputs: ['icon', 'label', 'text']
+    `
 })
 export class UxText { 
-    private icon:string = "";
-    private label:string = "";
-    private text:string = "";
+    @Input() icon:string = "";
+    @Input() label:string = "";
+    @Input() text:string = "";
     @Output() textChange: EventEmitter<string> = new EventEmitter<string>();
+
 }
