@@ -25,6 +25,7 @@
     "bootstrap": "^3.3.6",
     "core-js": "^2.4.0",
     "firebase": "^3.0.3",
+    "gulp-jspm-build": "0.0.15",
     "jquery": "^2.2.4",
     "materialize-css": "^0.97.6",
     "reflect-metadata": "^0.1.3",

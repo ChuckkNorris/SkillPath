@@ -5,10 +5,10 @@ import { UserModel, CheckpointModel } from '../../export';
 
 
 @Component({
-    moduleId: 'app/PAGES/learn-page/', // GOOD
-    selector: 'learn-page', // GOOD
-    templateUrl: 'learn.page.html', // GOOD
-    styleUrls: ['learn.page.css'], // GOOD
+    moduleId: 'app/PAGES/learn-page/',
+    selector: 'learn-page',
+    templateUrl: 'learn.page.html',
+    styleUrls: ['learn.page.css'],
     providers: [ CheckpointService] 
 })
 export class LearnPage {
