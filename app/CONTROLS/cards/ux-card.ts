@@ -2,23 +2,69 @@ import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 
 @Component({
     selector: 'ux-card',
+    styles: [`
+        .static {
+            color: black;
+            display: inline-block;
+            cursor: pointer;
+            width: 300px;
+        }
+        .dimmed {
+            position: relative;
+        }
+        .dimmed:before {
+            content: " ";
+            z-index: 1;
+            display: block;
+            position: absolute;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        span {
+            color: white;
+            z-index: 2;
+        }
+        img { 
+            max-width: 300px; 
+            max-height: 300px;
+            background-color: white;
+        }
+    `],
     template: `
-    <div class="card">
-        <div class="card-image">
-            <img src="images/sample-1.jpg">
-            <span class="card-title">{{title}}</span>
+    <div class="static">
+        <div class="card">
+            <div class="card-image">
+                <img class="dimmed" src="images/sample-1.jpg" >
+                <span class="card-title">{{title}}</span>
+            </div>
+           
+            <div class="card-content" (mouseenter)="onMouseEnterDescription();" (mouseleave)="onMouseLeaveDescription();" >
+                <p>{{description}}</p>
+            </div>
+            <div *ngIf="cardAction" class="card-action">
+                <a href="#">{{cardAction}}</a>
+            </div>
         </div>
-        <div class="card-content">
-            <p>{{description}}</p>
-        </div>
-        <div class="card-action">
-            <a href="#">This is a link</a>
-        </div>
-    </div>
+    <div>
     `
 })
 export class UxCard { 
     @Input() title: string;
     @Input() description: string;
     @Input() imageUrl: string;
+    @Input() cardAction: string;
+
+    onMouseEnterDescription() {
+        console.log('Enter'+ this.description);
+    }
+    onMouseLeaveDescription() {
+        console.log('Leave');
+    }
+
+    private addCardAction(){
+
+    }
 }

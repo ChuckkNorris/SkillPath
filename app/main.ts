@@ -6,6 +6,7 @@ import { ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
 import {UxButton, UxText, UxDropdown, UxContainer, UxCard} from './export';
 import { FireService} from './SERVICES/fire.service';
 import { UserService } from './SERVICES/user.service';
+import "angular2-materialize";
 
 
 bootstrap(AppComponent, [

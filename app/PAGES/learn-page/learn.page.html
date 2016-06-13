@@ -3,9 +3,43 @@
     <ux-button (click)="navigateToCheckpoint()" [icon]="'send'" [text]="'Submit'"></ux-button>
     <!--<ux-text class=" col s4" [(text)]="user.username" [icon]="'account_circle'" [label]="'Username'"></ux-text>
     <ux-text class="s4" [(text)]="user.password" [icon]="'vpn_key'" [label]="'Password'"></ux-text>-->
-    <p1 *ngFor="#checkpoint of checkpoints">
+    <p1 *ngFor="let checkpoint of checkpoints">
         {{checkpoint.title}}
     </p1>
-    <ux-dropdown></ux-dropdown>
-    <ux-card [title]="'Super Cool Tutorial'" [description]="'There was once a man named Bardy'"></ux-card>
+    
+     <!--<a materialize="dropdown" class='dropdown-button btn' href='#' data-activates='dropdown1'>Drop Me!</a>
+   <ul id='dropdown1' class='dropdown-content'>
+       <li *ngFor="let item of testCollection"><a href="#!">{{item}}</a></li>
+       <li><a href="#!">two</a></li>
+       <li class="divider"></li>
+       <li><a href="#!">three</a></li>
+     </ul>-->
+    <button (click)="logModel();" >Log Dropdown Model</button>
+
+    <select [(ngModel)]="dropdownModel" materialize="material_select" [materializeSelectOptions]="selectOptions">
+        <option *ngFor="let option of testCollection" [value]="option.title">{{option}}</option>
+    </select>
+
+    <ux-dropdown [label]="'Select Platform'" [collection]="platforms" [nameProperty]="'name'" [valueProperty]="'id'"></ux-dropdown>
 </ux-container>
+    <div class="row">    
+        <ux-card [title]="'Super Cool Tutorial'" [description]="'There was once a man named Bardyo that never had a shardy'"></ux-card>
+        <ux-card [title]="'Super Cool Tutorial'" [description]="'There was once a man named Bardy'"></ux-card>
+        <ux-card [title]="'Super Cool Tutorial'" [description]="'There was once a man named Bardy'"></ux-card>
+        <ux-card [title]="'Super Cool Tutorial'" [description]="'There was once a man named Bardy'"></ux-card>
+        <ux-card [title]="'Super Cool Tutorial'" [description]="'There was once a man named Bardy'"></ux-card>
+        <ux-card [title]="'Super Cool Tutorial'" [description]="'There was once a man named Bardy'"></ux-card>
+          <ux-card [title]="'Super Cool Tutorial'" [description]="'There was once a man named Bardy that never had a shardy'"></ux-card>
+        <ux-card [title]="'Super Cool Tutorial'" [description]="'There was once a man named Bardy'"></ux-card>
+        <ux-card [title]="'Super Cool Tutorial'" [description]="'There was once a man named Bardy'"></ux-card>
+        <ux-card [title]="'Super Cool Tutorial'" [description]="'There was once a man named Bardy'"></ux-card>
+        <ux-card [title]="'Super Cool Tutorial'" [description]="'There was once a man named Bardy'"></ux-card>
+        <ux-card [title]="'Super Cool Tutorial'" [description]="'There was once a man named Bardy'"></ux-card>
+
+    </div>
+    <div class="row">    
+        <div class="col s12 m7">
+            <ux-card [title]="'Super Cool Tutorial'" [description]="'There was once a man named Bardy'"></ux-card>
+        </div>
+    </div>
+
