@@ -1,4 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
+import {MaterializeDirective} from 'angular2-materialize'
 
 interface NameValuePair {
   name: any;
@@ -7,92 +8,46 @@ interface NameValuePair {
 // col s12
 @Component({
     selector: 'ux-dropdown',
+    directives: [MaterializeDirective],
    // changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-    <button (click)="onDropdownChanged($event.target.value);" >Log Dropdown Model</button>
-     <select [(ngModel)]="collectionModel"  id="dropdown1" multiple>
-     <option>Static Option</option>
-      <option  *ngFor="let item of testCollection">{{item}}</option>
-    </select>
+    <div class="input-field">
+      <select 
+        [ngModel]="model" 
+        (ngModelChange)="onChange($event);" 
+        materialize="material_select" 
+        [materializeSelectOptions]="boundCollection">
+        <option *ngIf="placeholder" disabled>{{placeholder}}</option>
+        <option *ngFor="let option of boundCollection" [ngValue]="option.value">{{option.name}}</option>
+      </select>
+      <label>{{label}}</label>
+    </div>
     `})
 export class UxDropdown implements OnInit { 
- // private boundCollection: NameValuePair[] = [];
-  private testCollection: string[] = ['dog', 'cat'];
-  // @Input() private label:string = '';
-  // @Input() private collection: string[] = [];
-  // @Input() private valueProperty: string;
-  // @Input() private nameProperty: string;
+  private boundCollection: NameValuePair[] = [];
+  @Input() label:string = '';
+  @Input() options: any[] = [];
+  @Input() placeholder: string;
+  @Input() valueProperty: string;
+  @Input() nameProperty: string;
 
-  private collectionModel: string[] = [];
-  constructor() {
-   // this.boundCollection = [{name: 'tyler', value: 1}];
-    console.log(this.testCollection);
-  }
+  @Output() model:any;
+
   ngOnInit() {
-      this.testCollection.push('mouse', 'ant');
       $('select').material_select();
-        this.testCollection.push('mouse', 'ant');
-        this.addAllToTestCollection();
+      this.createBoundCollection();
   }
-  
-  private onDropdownChanged(event: any) {
-      console.log(event);
-      console.log(this.collectionModel);
+  @Output() modelChange = new EventEmitter();
+  onChange(event){
+    this.modelChange.emit(event);
   }
 
-  addAllToTestCollection() {
-    this.testCollection.forEach(item => {
-      $('#dropdown1').append($("<option>" + item +"</option>"));
-    })
-     
-      $('select').on('contentChanged', function() {
-          // re-initialize (update)
-            $(this).material_select();
-      });
-      $('#dropdown1').trigger('contentChanged');
+  createBoundCollection() {
+    this.options.forEach(item => {
+      this.boundCollection.push({
+        name: this.nameProperty ? item[this.nameProperty] : item,
+        value: this.valueProperty ? item[this.valueProperty] : item
+      })
+    });
   }
-
-  private testStuff() {
-    // add new option
-    $('#dropdown1').append($("<option>test</option>"));
-    $('select').on('contentChanged', function() {
-              // re-initialize (update)
-                $(this).material_select();
-          });
-    // trigger event
-        $('#dropdown1').trigger('contentChanged');
-        this.testCollection.push('mouse', 'ant');
-  }
-
-  
-
-  private dropdownChange(){
-    // var $dropdown = $('#dropdown').empty().html(' ');
-    // var value = "some value";
-    //     $dropdown.append(
-    //       $("<option></option>")
-    //         .attr("value",value)
-    //         .text(value)
-    //     );
-    //   $(this).material_select();
-  }
-
-  
-
-  // createBoundCollection() {
-  //   this.collection.forEach(item => {
-  //     this.boundCollection.push({
-  //       name: item[this.nameProperty],
-  //       value: item[this.valueProperty]
-  //     })
-  //   });
-  //   console.log(this.boundCollection);
-  // }
 }
-
-  //  <!--<div class="input-field">
-  //   <label>{{label}}</label>
-  //   <ul>
-  //     <li *ngFor="let item of testCollection">{{item}}</li>
-  //   </ul>
-  // </div>-->

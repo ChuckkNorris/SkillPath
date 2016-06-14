@@ -28,7 +28,7 @@
     <script src="scripts/shim.min.js"></script>
     <script src="scripts/zone.min.js"></script>
     <script src="scripts/Reflect.js"></script>
-    <!--<script src="bundle.js"></script>-->
+    
   
        <script src="scripts/system.js"></script>
     <!---->
@@ -36,17 +36,17 @@
     <!---->
     
      <!-- Polyfill(s) for older browsers -->
-    <!--</script>
-    
     
  
-    -->
-    
-    <!-- 2. Configure SystemJS -->
+    <!-- DEV SYSTEMJS -->
     <script src="systemjs.config.js"></script>
     <script>
       System.import('app').catch(function(err){ console.error(err); });
     </script>
+    <!-- DEPLOYMENT SYSTEMJS -->
+    <!--<script src="bundle.js"></script>-->
+
+
   </head>
   <!-- 3. Display the application -->
   <body>

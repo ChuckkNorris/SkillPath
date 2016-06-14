@@ -1,16 +1,16 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
     selector: 'ux-button',
     template: `
     <button class="waves-effect waves-light btn">
         <i class="material-icons left">{{icon}}</i>
-        {{text}}
+        <ng-content></ng-content>
     </button>
-    `,
-    inputs: ['icon', 'text']
+    
+    `
 })
 export class UxButton { 
-    private icon:string = "";
-    private text:string = "";
+    @Input() icon:string = "";
+    @Input() text: string = "";
 }
