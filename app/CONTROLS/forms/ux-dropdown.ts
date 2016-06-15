@@ -1,10 +1,6 @@
 import {Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
-import {MaterializeDirective} from 'angular2-materialize'
-
-interface NameValuePair {
-  name: any;
-  value: any;
-}
+import {MaterializeDirective} from 'angular2-materialize';
+import {NameValuePair} from '../../MODELS/name-value-pair.model';
 // col s12
 @Component({
     selector: 'ux-dropdown',

@@ -4,11 +4,8 @@ import {UserService} from '../../SERVICES/user.service';
 import {CheckpointService} from '../../SERVICES/checkpoint.service';
 import { UserModel, CheckpointModel } from '../../export';
 import {MaterializeDirective, toast} from "angular2-materialize";
+import {Platform} from '../../MODELS/helpers.interface';
 import * as Materialize from 'angular2-materialize';
-interface Platform {    
-    name: string;
-    id: number;
-}
 
 @Component({
     moduleId: 'app/PAGES/learn-page/',
