@@ -17,7 +17,8 @@ export class FireService {
 
     public getArray(path: string): Observable<any[]> {
       return Observable.create((observer) => {
-        this.firebase.child(path).on('value', (snapshot) => {
+        this.firebase.child(path).once('value', (snapshot) => {
+          console.log(snapshot.val());
           var array = $.map(snapshot.val(), function(value, index) {
                 return [value];
             });

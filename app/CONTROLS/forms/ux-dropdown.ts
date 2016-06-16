@@ -41,7 +41,6 @@ export class UxDropdown implements OnInit, OnChanges {
 
   @Output() modelChange = new EventEmitter();
   onChange(event){
-    this.createBoundCollection();
     this.modelChange.emit(event);
        console.log(event);
   }
