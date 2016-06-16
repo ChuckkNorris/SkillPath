@@ -3,7 +3,3 @@ export interface NameValuePair {
   value: any;
 }
 
-export interface Platform {    
-    name: string;
-    id: number;
-}

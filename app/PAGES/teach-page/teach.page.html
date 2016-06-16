@@ -4,21 +4,23 @@
             <ux-dropdown [(model)]="selectedTier1Tag" 
                 [label]="'Select Platform'" 
                 [options]="tier1Tags"></ux-dropdown>
+                {{tier1Tags}}
         </div>
         <div class="col s3 m3 l3">
             <ux-dropdown [(model)]="selectedTier2Tag" 
                 [label]="'Select Focus Area'" 
-                [options]="tier1Tags"></ux-dropdown>
+                [options]="tier2Tags"></ux-dropdown>
+                
         </div>
         <div class="col s3 m3 l3">
             <ux-dropdown [(model)]="selectedTier3Tag" 
                  [label]="'Select Technology'" 
-                [options]="tier1Tags"></ux-dropdown>
+                [options]="tier3Tags"></ux-dropdown>
         </div>
         <div class="col s3 m3 l3">
             <ux-dropdown [(model)]="selectedTier4Tag" 
                 [label]="'Select your Path'" 
-                [options]="tier1Tags"></ux-dropdown>
+                [options]="tier4Tags"></ux-dropdown>
         </div>
     </div>
     <div class="row">

@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter, OnChanges} from '@angular/core';
 import {MaterializeDirective} from 'angular2-materialize';
 import {NameValuePair} from '../../MODELS/name-value-pair.model';
 // col s12
@@ -19,7 +19,7 @@ import {NameValuePair} from '../../MODELS/name-value-pair.model';
       <label>{{label}}</label>
     </div>
     `})
-export class UxDropdown implements OnInit { 
+export class UxDropdown implements OnInit, OnChanges { 
   private boundCollection: NameValuePair[] = [];
   @Input() label:string = '';
   @Input() options: any[] = [];
@@ -31,14 +31,23 @@ export class UxDropdown implements OnInit {
 
   ngOnInit() {
       $('select').material_select();
+   
       this.createBoundCollection();
   }
+
+  ngOnChanges() {
+    this.createBoundCollection();
+  }
+
   @Output() modelChange = new EventEmitter();
   onChange(event){
+    this.createBoundCollection();
     this.modelChange.emit(event);
+       console.log(event);
   }
 
   createBoundCollection() {
+    this.boundCollection = [];
     this.options.forEach(item => {
       this.boundCollection.push({
         name: this.nameProperty ? item[this.nameProperty] : item,

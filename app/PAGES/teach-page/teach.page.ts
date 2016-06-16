@@ -15,7 +15,7 @@ export class TeachPage {
         this.getTiers();
     }
 
-    tier1Tags: string[] = []
+    tier1Tags: string[] = [];
     tier2Tags: string[] = [];
     tier3Tags: string[] = [];
     tier4Tags: string[] = [];
@@ -35,22 +35,6 @@ export class TeachPage {
         this.tagService.getTagsAtTier(2).subscribe(tags => this.tier2Tags = tags);
         this.tagService.getTagsAtTier(3).subscribe(tags => this.tier3Tags = tags);
         this.tagService.getTagsAtTier(4).subscribe(tags => this.tier4Tags = tags);
-    }
-
-    createCheckpoint() {
-      //  this.checkpointService.createCheckpoint(this.checkpoint);
-    }
-
-    firebaseTest() {
-        // this.fireService.getArray('options/platforms').subscribe(platforms => 
-        //     console.log(platforms)
-        // );
-        // this.fireService.push('options/platforms', 'iOS');
-        // this.fireService.push('options/platforms', 'Windows');
-        // this.fireService.push('options/platforms', 'Android');
-        // this.fireService.getArray('options/platforms').subscribe(platforms => 
-        //     console.log(platforms)
-        // );
     }
 
 }
