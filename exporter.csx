@@ -66,7 +66,7 @@ private ExportEntry CreateExportEntry(FileInfo exportFile, string exportDirPath,
 }
 private string GetFirstExportClassName(FileInfo exportFile) {
     string className = null;
-    Regex regular = new Regex(@"(?<=export[\s+]class|interface)[^s+][^\s]+");
+    Regex regular = new Regex(@"(?<=export[\s+](abstract[\s+]|\s*)(class|interface))[^s+][^\s]+");
 
     using (StreamReader streamer = new StreamReader(exportFile.OpenRead())) {
         string contents = streamer.ReadToEnd();

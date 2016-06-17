@@ -13,7 +13,8 @@
     'firebase':                   'node_modules/firebase',
     "materialize-css": "node-modules/materialize-css",
     "materialize": "node_modules/angular2-materialize",
-    "angular2-materialize": "node_modules/angular2-materialize"
+    "angular2-materialize": "node_modules/angular2-materialize",
+    "models": "app/models" 
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
@@ -26,7 +27,8 @@
     "materialize": {
         "main": "dist/materialize-directive",
         "defaultExtension": "js"
-    }
+    },
+    "models": { defaultExtension: 'ts' }
   };
   var ngPackageNames = [
     'common',
