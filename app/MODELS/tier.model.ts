@@ -1,4 +1,7 @@
-export class Tier {
-    public key: string;
-    public tags: string;
+import {BaseModel, TagModel} from '../export';
+
+export class TierModel extends BaseModel {
+    title: string;
+    tags: TagModel[];
+    tutorialUrl: string;
 }

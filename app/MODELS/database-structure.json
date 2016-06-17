@@ -22,6 +22,7 @@
             "directives": true
         }
     },
+
     "tags" : {
         "one": {
             "software-development": {
@@ -73,7 +74,18 @@
     },
     "tagsCheckpointsLink": {
         "one": {
-            "software-development": "<checkpoint-key>"
+            "software-development": {
+                "<checkpoint-key>": true,
+                "<checkpoint-key>": true,
+                "<checkpoint-key>": true
+            }
+        },
+        "two": {
+            "web": {
+                "<all-child-checkpoints-will-also-appear-under-parent-tier's-matching-tag>": true,
+                "<checkpoint-key>": true,
+                "<checkpoint-key>": true
+            }
         }
     },
 

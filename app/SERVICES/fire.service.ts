@@ -28,6 +28,23 @@ export class FireService {
      })
     }
 
+    public set(pathToSaveDataTo: string, dataToSave: any) {
+       let locationReference = this.firebase.child(pathToSaveDataTo);
+       locationReference.once("value", snapshot => {
+         if (snapshot.exists()) {
+           // TODO: throw exception with Enums.Exception.Exists argument
+           console.log('That location already exists');
+         }
+         else {
+            locationReference.set(dataToSave, (error) => {
+              if (error) 
+                throw error;
+            });
+         }
+       });
+         
+    }
+
     public push(pathToSaveDataTo: string, dataToSave: any) {
       let locationReference = this.firebase.child(pathToSaveDataTo);
       locationReference.push(dataToSave, (error) => {
@@ -38,6 +55,8 @@ export class FireService {
       //   console.log(error);
       // });
     }
+
+    
 
  
 }

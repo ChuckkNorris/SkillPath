@@ -16,4 +16,6 @@ export class CheckpointService {
         return checkpoints as Observable<any>;
        // return this.firebaseService.get("users/" + username);
     }
+
+   
 }
