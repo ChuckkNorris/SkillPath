@@ -21,4 +21,4 @@ export { CheckpointService } from './SERVICES/checkpoint.service';
 export { FireService } from './SERVICES/fire.service';
 export { FirebaseService } from './SERVICES/firebase.service';
 export { TagService } from './SERVICES/tag.service';
-export { UserService } from './SERVICES/user.service';
+export { TierService } from './SERVICES/tier.service';

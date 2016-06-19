@@ -8,10 +8,10 @@ import {TagService} from '../../SERVICES/tag.service';
     selector: 'teach-page',
     templateUrl: 'teach.page.html',
     styleUrls: ['teach.page.css'],
-    providers: [TagService]
+    providers: [TagService, CheckpointService]
 })
 export class TeachPage {
-    constructor(private tagService: TagService) {
+    constructor(private tagService: TagService, private checkpointService: CheckpointService) {
         this.getTiers();
     }
 
@@ -27,8 +27,8 @@ export class TeachPage {
 
     private checkpoint: CheckpointModel = new CheckpointModel;
     createTagAtTier(tier: number, tagName: string){
-        this.tagService.addTagToTier(tier, tagName);
-        console.log('Tier: ' + tier + ', Tag: ' + tagName);
+        this.checkpointService.testRun();  
+        // this.tagService.addTagToTier(tier, tagName);
     }
     getTiers() {
         this.tagService.getTagsAtTier(1).subscribe(tags => {this.tier1Tags = tags;});

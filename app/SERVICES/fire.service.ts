@@ -56,6 +56,47 @@ export class FireService {
       // });
     }
 
+    public testRun() {
+      let ref = this.firebase.child('test/tags');
+      // let newTag = {
+      //   "web": {
+      //     name: "Web",
+      //     tier: "1",
+      //     children: {
+      //       "angular2": true}},
+      //   "windows": {
+      //     name: "Windows",
+      //     tier: "1",
+      //     children: {
+      //       "universal-windows": true,
+      //       "front-end": true,
+      //       "back-end": true}},
+      //   "angular2": {
+      //     name: "Angular 2.x",
+      //     tier: "2",
+      //     parent: "web",
+      //     children: {
+      //       "basics": true,
+      //       "front-end": true,
+      //       "back-end": true}}
+      // };
+      // ref.set(newTag, error => console.log(error));
+
+      ref.orderByChild("tier").equalTo("1").once("value", snapshot => console.log(snapshot.val()));
+
+    }
+
+    private createCheckpoint() {
+      let ref = this.firebase.child('test/tags');
+      // let checkpoints = {
+      // {
+      //     name: "Building Angular2",
+      //     tags
+      
+      // };
+      // ref.set(newTag, error => console.log(error));
+    }
+
     
 
  

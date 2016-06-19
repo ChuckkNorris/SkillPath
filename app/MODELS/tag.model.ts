@@ -9,7 +9,7 @@ export class TagModel extends BaseModel {
     }
     public set name(v : string) {
         this._name = v;
-        this.key = BaseModel.formatAsKey(v);
+        this.key = v;
     }
     
     parentTag: TagModel;

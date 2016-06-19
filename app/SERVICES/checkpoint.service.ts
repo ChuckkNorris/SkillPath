@@ -17,5 +17,9 @@ export class CheckpointService {
        // return this.firebaseService.get("users/" + username);
     }
 
+    public testRun() {
+        this.fireService.testRun();
+    }
+
    
 }

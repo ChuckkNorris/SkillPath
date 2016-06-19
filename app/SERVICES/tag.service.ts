@@ -17,7 +17,7 @@ export class TagService {
     }
 
     public createTag(tag: TagModel) {
-        this.fireService.set('tiers/' + tag.tierKey + '/' + tag.key )
+        //this.fireService.set('tiers/' + tag.tierKey + '/' + tag.key, )
     }
 
 

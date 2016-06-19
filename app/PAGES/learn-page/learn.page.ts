@@ -1,8 +1,7 @@
 import {Component, EventEmitter, ViewChild, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {UserService} from '../../SERVICES/user.service';
 import {CheckpointService} from '../../SERVICES/checkpoint.service';
-import { UserModel, CheckpointModel } from '../../export';
+import { CheckpointModel } from '../../export';
 import {MaterializeDirective, toast} from "angular2-materialize";
 import {Platform} from '../../MODELS/platform.model';
 import * as Materialize from 'angular2-materialize';

@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Routes, Router, ROUTER_DIRECTIVES } from '@angular/router';
 import { LearnPage, TeachPage, CheckpointPage } from './export';
-import {UserService} from './SERVICES/user.service';
 
 @Component({
   moduleId: 'app/',
   selector: 'my-app',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
-  providers: [UserService],
   directives: [ROUTER_DIRECTIVES]
 })
 
@@ -24,10 +22,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // Enable Mobile Menu
     $(".button-collapse").sideNav();
-    $('select').material_select();
-    
+    //$('select').material_select();
   }
-
   
 
   routeIsActive(routePath: string) {
