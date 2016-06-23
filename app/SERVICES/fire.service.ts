@@ -10,7 +10,6 @@ export class FireService {
     public get(path: string): Observable<any> {
       return Observable.create((observer) => {
         this.firebase.child(path).on('value', (snapshot) => {
-          
           observer.next(snapshot.val());
         });
      })
@@ -27,13 +26,6 @@ export class FireService {
           observer.next(array);
         });
      })
-    }
-
-    private convertToArray(objectToConvert: any): any[] {
-      let array: any[] = $.map(objectToConvert, function(value, index) {
-          return [index];
-      });
-      return array;
     }
 
     public set(pathToSaveDataTo: string, dataToSave: any) {
@@ -59,89 +51,25 @@ export class FireService {
         if (error) 
           throw error;
       });
-      // locationReference.set(dataToSave, (error) => {
-      //   console.log(error);
-      // });
     }
 
-    public testRun() {
-    //  this.createCheckpoint();
-      this.getCheckpoints();
-    }
-
-    private getCheckpoints() {
-      let ref = this.firebase.child('test/checkpoints');
-      // example Checkpoint = {name: "Building an app", tags: {{tier: "1", "name": "apps"}, {tier: "2", "name": "angular2"}}}
-      ref.orderByChild('tags/1').equalTo("web").once('value', snap => console.log(snap.val()));
-      
-      // let querybase = new Querybase(ref, ['tags']);
-      // let queryRef = querybase.where({tags:{"1": "apps", "2":"angular2"}});
-      //  queryRef.on('value', snap => console.log(snap));
-
-     // ref.orderByChild("tags").equalTo({tag: 'web'}).once("value", snapshot => console.log(snapshot.val()));
-
-    }
-
-    public getCheckpointss(tags: any[]) {
-      // tag.tier, tag.key
-      let checkpointKeysToGet: string[] = [];
-      tags.forEach(tag => {
-        let ref = this.firebase.child('test/tags/' + tag.tier + '/' + tag.key + '/checkpoints');
-        ref.once('value', snap => {
-          let tagKeys:string[] = this.convertToArray(snap.val()); // convert to array
-          if (checkpointKeysToGet.length == 0){
-            checkpointKeysToGet = checkpointKeysToGet.concat(tagKeys);
-          }
-          else {
-            checkpointKeysToGet.forEach(existingTagKey => {
-              let tagKeysInBothTiers = tagKeys.filter(tagKey => {
-                return checkpointKeysToGet.includes(tagKey, 0)
-              });
-              checkpointKeysToGet = tagKeysInBothTiers;
-              console.log(checkpointKeysToGet);
-            });
-           
-          }
-        })
-        
-      })
-      
-    }
-
-    public createCheckpoint(tags: any[], checkpoint: any) {
-      // push checkpoint
-      let checkpointRef = this.firebase.child('test/checkpoints');
-      let checkpointKey = checkpointRef.push(checkpoint).key(); // might have to do separate call
-
-      // Add checkpoint under each tag
-      tags.forEach(tag => {
-        let tagRef = this.firebase.child('test/tags/' + tag.tier + '/' + tag.key + '/checkpoints/' + checkpointKey);
-        tagRef.set(true)
+    public static convertToArrayOfKeys(objectToConvert: any): any[] {
+      let array: any[] = $.map(objectToConvert, function(value, index) {
+          return [index];
       });
+      return array;
     }
 
-    // allTags = [
-    //   {"abc": true, "def": true, "hij": true},
-    //   {"abc": true, "def": true}
-    // ];
-
-    // tags: [
-    //   { "0": [
-    //     {"software-development": {name: "Software Development", checkpoints: [ {"abc": true}, {"def": true}, {"hij": true}]}}
-    //   ]},
-    //   {"1": [
-    //     {"web": {name: "Web", checkpoints: [ {"abc": true}, {"def": true}]}},
-    //     {"android": {name: "Android", checkpoints: [{"hij": true}]}}  
-    //   ]}
-    // ];
-
-    // checkpoints: [
-    //   {"abc": { name: "Angular2 Quick Start"}},
-    //   {"def": { name: "Building global directives in Angular2"}},
-    //   {"hij": { name: "Android Quick Start"}},
-    // ];
-
+    public static getDuplicates(firstArray: any[], secondArray: any[]) : any[] {
+        if (!Array.isArray(firstArray) || firstArray.length == 0)
+            return [];
+        let duplicates: any[] = [];
+        firstArray.forEach(() => {
+             duplicates = secondArray.filter(secondItem => {
+                return firstArray.includes(secondItem, 0)
+            });
+        })
+        return  duplicates;
+    }
     
-
- 
 }

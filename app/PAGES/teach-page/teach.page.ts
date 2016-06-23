@@ -33,7 +33,7 @@ export class TeachPage {
         let checkpoint: CheckpointModel = new CheckpointModel();
         checkpoint.name = "checkpointName";
         
-        this.fireService.createCheckpoint(tags, checkpoint);
+        this.checkpointService.createCheckpoint(tags, checkpoint);
     }
 
     getCheckpoints() {
@@ -46,7 +46,7 @@ export class TeachPage {
         tier2Tag.name= this.selectedTier2Tag
         tier2Tag.tier= 2;
         tags.push(tier2Tag);
-        this.fireService.getCheckpointss(tags);
+        this.checkpointService.getCheckpointsByTag(tags);
     }
 
     tier1Tags: string[] = [];
@@ -61,7 +61,7 @@ export class TeachPage {
 
     private checkpoint: CheckpointModel = new CheckpointModel;
     createTagAtTier(tier: number, tagName: string){
-        this.checkpointService.testRun();  
+        //this.checkpointService.testRun();  
         // this.tagService.addTagToTier(tier, tagName);
     }
     getTiers() {
