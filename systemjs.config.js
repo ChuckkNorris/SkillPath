@@ -14,13 +14,14 @@
     "materialize-css": "node-modules/materialize-css",
     "materialize": "node_modules/angular2-materialize",
     "angular2-materialize": "node_modules/angular2-materialize",
-    "models": "app/models" 
+    "querybase":          'node_modules/querybase/dist'
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
     'app':                        { main: 'bin/main.js',  defaultExtension: 'js' },
      'rxjs':                       { defaultExtension: 'js' },
     'angular2-in-memory-web-api': { defaultExtension: 'js' },
+    'querybase': {defaultExtension: 'js'},
     "materialize-css": {
           "main": "dist/js/materialize"
     },

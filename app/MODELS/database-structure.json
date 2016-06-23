@@ -1,55 +1,30 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 {
     "tiers": {
-        "one": {
+        "1": {
             "software-development": true
         },
-        "two": {
+        "2": {
             "web": true,
             "ios": true,
             "android": true,
             "windows": true
         },
-        "three": {
+        "3": {
             "basics": true,
             "front-end": true,
             "back-end": true
         },
-        "four": {
+        "4": {
             "angular-2": true
         },
-        "five": {
+        "5": {
             "basics": true,
             "directives": true
         }
     },
 
     "tags" : {
-        "one": {
+        "1": {
             "software-development": {
                 "name": "Software Development",
                 "tier": "one",
@@ -61,7 +36,7 @@
                 }
             }
         },
-        "two": {
+        "2": {
             "web": {
                 "name": "Web",
                 "parent": "software-development",
@@ -70,32 +45,26 @@
                     "front-end": true,
                     "back-end": true
                 }
-            },
-            
-            "ios": {
-                "name": "iOS",
-                "tier": "two"
-            },
-            "windows": {
-                "tier": "two"
-            },
-            "android": {
-                "tier": "two"
             }
         },
-        
-       
-        "angular-2": {
-            "title" : "Angular 2.x",
-            "tier": "three",
-            "parent": "front-end",
-            "children": {
-                "quickstart": true,
-                "environment": true,
-                "components": true,
-                "typescript": true
+        "3": {
+            ""
+        },
+        "4": {
+            "angular-2": {
+                "title" : "Angular 2.x",
+                "tier": "three",
+                "parent": "front-end",
+                "children": {
+                    "quickstart": true,
+                    "environment": true,
+                    "components": true,
+                    "typescript": true
+                }
             }
         }
+       
+        
     },
     "tagsCheckpointsLink": {
         "one": {
