@@ -29,6 +29,13 @@ export class FireService {
      })
     }
 
+    private convertToArray(objectToConvert: any): any[] {
+      let array: any[] = $.map(objectToConvert, function(value, index) {
+          return [index];
+      });
+      return array;
+    }
+
     public set(pathToSaveDataTo: string, dataToSave: any) {
        let locationReference = this.firebase.child(pathToSaveDataTo);
        locationReference.once("value", snapshot => {
@@ -75,18 +82,33 @@ export class FireService {
 
     }
 
-    private getCheckpointss(tags: any[]) {
+    public getCheckpointss(tags: any[]) {
       // tag.tier, tag.key
-
+      let checkpointKeysToGet: string[] = [];
       tags.forEach(tag => {
         let ref = this.firebase.child('test/tags/' + tag.tier + '/' + tag.key + '/checkpoints');
         ref.once('value', snap => {
-          
+          let tagKeys:string[] = this.convertToArray(snap.val()); // convert to array
+          if (checkpointKeysToGet.length == 0){
+            checkpointKeysToGet = checkpointKeysToGet.concat(tagKeys);
+          }
+          else {
+            checkpointKeysToGet.forEach(existingTagKey => {
+              let tagKeysInBothTiers = tagKeys.filter(tagKey => {
+                return checkpointKeysToGet.includes(tagKey, 0)
+              });
+              checkpointKeysToGet = tagKeysInBothTiers;
+              console.log(checkpointKeysToGet);
+            });
+           
+          }
         })
+        
       })
+      
     }
 
-    private createCheckpoint(tags: any[], checkpoint: any) {
+    public createCheckpoint(tags: any[], checkpoint: any) {
       // push checkpoint
       let checkpointRef = this.firebase.child('test/checkpoints');
       let checkpointKey = checkpointRef.push(checkpoint).key(); // might have to do separate call
@@ -98,26 +120,26 @@ export class FireService {
       });
     }
 
-    allTags = [
-      {"abc": true, "def": true, "hij": true},
-      {"abc": true, "def": true}
-    ];
+    // allTags = [
+    //   {"abc": true, "def": true, "hij": true},
+    //   {"abc": true, "def": true}
+    // ];
 
-    tags: [
-      { "0": [
-        {"software-development": {name: "Software Development", checkpoints: [ {"abc": true}, {"def": true}, {"hij": true}]}}
-      ]},
-      {"1": [
-        {"web": {name: "Web", checkpoints: [ {"abc": true}, {"def": true}]}},
-        {"android": {name: "Android", checkpoints: [{"hij": true}]}}  
-      ]}
-    ];
+    // tags: [
+    //   { "0": [
+    //     {"software-development": {name: "Software Development", checkpoints: [ {"abc": true}, {"def": true}, {"hij": true}]}}
+    //   ]},
+    //   {"1": [
+    //     {"web": {name: "Web", checkpoints: [ {"abc": true}, {"def": true}]}},
+    //     {"android": {name: "Android", checkpoints: [{"hij": true}]}}  
+    //   ]}
+    // ];
 
-    checkpoints: [
-      {"abc": { name: "Angular2 Quick Start"}},
-      {"def": { name: "Building global directives in Angular2"}},
-      {"hij": { name: "Android Quick Start"}},
-    ];
+    // checkpoints: [
+    //   {"abc": { name: "Angular2 Quick Start"}},
+    //   {"def": { name: "Building global directives in Angular2"}},
+    //   {"hij": { name: "Android Quick Start"}},
+    // ];
 
     
 

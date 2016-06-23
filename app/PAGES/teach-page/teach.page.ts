@@ -1,18 +1,52 @@
 import {Component} from '@angular/core';
 import {  CheckpointService } from '../../SERVICES/checkpoint.service';
-import {CheckpointModel } from "../../export";
+import {CheckpointModel, TagModel } from "../../export";
 import {TagService} from '../../SERVICES/tag.service';
+import {FireService} from '../../SERVICES/fire.service';
 
 @Component({
     moduleId: 'app/PAGES/teach-page/',
     selector: 'teach-page',
     templateUrl: 'teach.page.html',
     styleUrls: ['teach.page.css'],
-    providers: [TagService, CheckpointService]
+    providers: [TagService, CheckpointService, FireService]
 })
 export class TeachPage {
-    constructor(private tagService: TagService, private checkpointService: CheckpointService) {
+    constructor(private tagService: TagService, private checkpointService: CheckpointService, private fireService: FireService) {
         this.getTiers();
+    }
+    checkpointName: string;
+    selectedTags:TagModel[] = [];
+
+    createCheckpoint(){
+        let tags: TagModel[] = [];
+        let tier1Tag = new TagModel();
+        tier1Tag.name= this.selectedTier1Tag
+        tier1Tag.tier= 1;
+        tags.push(tier1Tag);
+        let tier2Tag = new TagModel();
+        tier2Tag.name= this.selectedTier2Tag
+        tier2Tag.tier= 2;
+        tags.push(tier2Tag);
+
+        this.selectedTags = tags;
+        let checkpoint: CheckpointModel = new CheckpointModel();
+        checkpoint.name = "checkpointName";
+        
+        this.fireService.createCheckpoint(tags, checkpoint);
+    }
+
+    getCheckpoints() {
+        let tags: TagModel[] = [];
+        let tier1Tag = new TagModel();
+        tier1Tag.name= this.selectedTier1Tag
+        tier1Tag.tier= 1;
+        tags.push(tier1Tag);
+        let tier2Tag = new TagModel();
+        tier2Tag.name= this.selectedTier2Tag
+        tier2Tag.tier= 2;
+        tags.push(tier2Tag);
+        this.fireService.getCheckpointss(tags);
     }
 
     tier1Tags: string[] = [];

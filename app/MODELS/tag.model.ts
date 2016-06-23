@@ -11,9 +11,5 @@ export class TagModel extends BaseModel {
         this._name = v;
         this.key = v;
     }
-    
-    parentTag: TagModel;
-    childTags: TagModel[];
-
-    tierKey: string;
+    tier: number;
 }
