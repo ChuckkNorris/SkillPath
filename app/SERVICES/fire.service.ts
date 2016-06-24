@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import { Observable, Observer } from 'rxjs/rx';
 import {Querybase} from './querybase';
-
+import {TagModel} from '../export';
 
 @Injectable()
 export class FireService {
@@ -15,7 +15,7 @@ export class FireService {
      })
     }
 
-    public getArray(path: string): Observable<any[]> {
+    public getArray(path: string, orderByPath?: string): Observable<any[]> {
       return Observable.create((observer) => {
         this.firebase.child(path).once('value', (snapshot) => {
           console.log(snapshot.val());
@@ -45,12 +45,13 @@ export class FireService {
          
     }
 
-    public push(pathToSaveDataTo: string, dataToSave: any) {
+    public push(pathToSaveDataTo: string, dataToSave: any) : string {
       let locationReference = this.firebase.child(pathToSaveDataTo);
-      locationReference.push(dataToSave, (error) => {
+      let newKey = locationReference.push(dataToSave, (error) => {
         if (error) 
           throw error;
-      });
+      }).key();
+      return  newKey;
     }
 
     public static convertToArrayOfKeys(objectToConvert: any): any[] {
@@ -71,5 +72,4 @@ export class FireService {
         })
         return  duplicates;
     }
-    
 }

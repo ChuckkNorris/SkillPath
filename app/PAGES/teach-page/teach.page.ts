@@ -19,15 +19,7 @@ export class TeachPage {
     selectedTags:TagModel[] = [];
 
     createCheckpoint(){
-        let tags: TagModel[] = [];
-        let tier1Tag = new TagModel();
-        tier1Tag.name= this.selectedTier1Tag
-        tier1Tag.tier= 1;
-        tags.push(tier1Tag);
-        let tier2Tag = new TagModel();
-        tier2Tag.name= this.selectedTier2Tag
-        tier2Tag.tier= 2;
-        tags.push(tier2Tag);
+        let tags = this.getSelectedTags();
 
         this.selectedTags = tags;
         let checkpoint: CheckpointModel = new CheckpointModel();
@@ -37,16 +29,29 @@ export class TeachPage {
     }
 
     getCheckpoints() {
-        let tags: TagModel[] = [];
-        let tier1Tag = new TagModel();
-        tier1Tag.name= this.selectedTier1Tag
-        tier1Tag.tier= 1;
-        tags.push(tier1Tag);
-        let tier2Tag = new TagModel();
-        tier2Tag.name= this.selectedTier2Tag
-        tier2Tag.tier= 2;
-        tags.push(tier2Tag);
+        let tags = this.getSelectedTags();
         this.checkpointService.getCheckpointsByTag(tags);
+    }
+
+    getSelectedTags(): TagModel[] {
+        let tags: TagModel[] = [
+            this.selectedTier1Tag,
+            this.selectedTier2Tag,
+            this.selectedTier3Tag,
+            this.selectedTier4Tag
+        ];
+        return tags;
+    }
+
+    tag1Change(event: Event) {
+        // Change values to all where parent == tag
+        // this.tier2Tags = this.checkpointService.getNextTierTags();
+    }
+
+    tag2Change( event: Event) {    
+        // Change values to all where parent == tag
+       this.selectedTier2Tag.parent = this.selectedTier1Tag;
+       console.log(this.selectedTier2Tag);
     }
 
     tier1Tags: string[] = [];
@@ -54,10 +59,10 @@ export class TeachPage {
     tier3Tags: string[] = [];
     tier4Tags: string[] = [];
 
-    selectedTier1Tag: string;
-    selectedTier2Tag: string;
-    selectedTier3Tag: string;
-    selectedTier4Tag: string;
+    selectedTier1Tag: TagModel = new TagModel();
+    selectedTier2Tag: TagModel = new TagModel();
+    selectedTier3Tag: TagModel = new TagModel();
+    selectedTier4Tag: TagModel = new TagModel();
 
     private checkpoint: CheckpointModel = new CheckpointModel;
     createTagAtTier(tier: number, tagName: string){

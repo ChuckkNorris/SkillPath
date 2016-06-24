@@ -17,9 +17,22 @@ export class TagService {
     }
 
     public createTag(tag: TagModel) {
-        //this.fireService.set('tiers/' + tag.tierKey + '/' + tag.key, )
+        this.fireService.set('test/tags/' + tag.tier + '/' + tag.name + '/parent', tag.parent.key);
     }
 
+    public getNextTierTags(tag: TagModel) {
+        let nextTier = tag.tier + 1;
+        let nextTierPath = 'test/tags/' + nextTier + '/' 
+        this.fireService.getArray('test/tags/', '');
+    }
+
+    // public saveNewTag(tag: TagModel) {
+    //   let ref = this.firebase.child('test/tags/' + tag.tier + '/' + tag.name + '/children');
+    //   tag.children.forEach(childTag => {
+    //     let childTagRef = ref.child(childTag.key);
+    //     childTagRef.set(true);  
+    //   });
+    // }
 
 
    
