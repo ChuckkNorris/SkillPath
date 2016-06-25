@@ -3,9 +3,14 @@ import {BaseModel} from '../export'
 // 'tags/<tierKey>/<tagKey>'
 export class TagModel extends BaseModel {
 
-    constructor(tier: number) {
+    constructor(tier?: number, tagObject?: any) {
         super();
-        this.tier = tier;
+        if (tier)
+            this.tier = tier;
+        if (tagObject) {
+            this.createTagFromObject(tagObject);
+        }
+
         
     }
     private _name : string;
@@ -19,4 +24,8 @@ export class TagModel extends BaseModel {
     tier: number;
 
     parent: TagModel;
+
+    private createTagFromObject(tagObject: any) {
+        
+    }
 }

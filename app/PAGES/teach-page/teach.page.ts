@@ -14,6 +14,7 @@ import {FireService} from '../../SERVICES/fire.service';
 export class TeachPage {
     constructor(private tagService: TagService, private checkpointService: CheckpointService, private fireService: FireService) {
         this.getTiers();
+        this.selectedTier1Tag.name = 'Software Development';
     }
     checkpointName: string;
     selectedTags:TagModel[] = [];

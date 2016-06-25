@@ -57,24 +57,41 @@ export class FireService {
        });
     }
 
-    public getNextTierTags(tag: TagModel) {
+    public getNextTierTags(tag: TagModel): Observable<TagModel[]> {
       let nextTier = tag.tier + 1;
       let ref = this.firebase.child('test/tags/' + nextTier);
       //.startAt(tag.key).endAt(tag.key)
-      ref.once('value', snap => {
-        var tagsOrderedByParent = FireService.convertToArray(snap.val());
-        console.log(tagsOrderedByParent);
-        let nextTierTags: TagModel[] = [];
-        tagsOrderedByParent.forEach(nextTierTag => {
-          let nextTierTagModel: TagModel = nextTierTag;
-          // CONVERT TO TAGMODEL
-        // nextTierTagModel.key = nextTierTag.key;
-          console.log(nextTierTagModel);
-          if (nextTierTagModel.parent && Object.keys(nextTierTagModel.parent)[0] == tag.key)
-            nextTierTags.push(nextTierTagModel);
-        });
-        
-      });
+      return Observable.create(observer => {
+        ref.once('value', snap => {
+            var tagsOrderedByParent = FireService.convertToArray(snap.val());
+            console.log(tagsOrderedByParent);
+            let nextTierTags: TagModel[] = [];
+            tagsOrderedByParent.forEach(nextTierTag => {
+              let potentialTag: TagModel = new TagModel(); 
+              potentialTag.key = Object.keys(nextTierTag)[0];
+              potentialTag.tier = nextTier;
+            
+              let parentKeys = FireService.getFirstObjectValue(nextTierTag).parent;
+              let parentKeysAsArray = FireService.convertToArrayOfKeys(parentKeys);
+
+              parentKeysAsArray.forEach(parentKey => {
+                if (parentKey == tag.key) {
+                  potentialTag.parent = parentKey;
+                  nextTierTags.push(potentialTag);
+                }
+              });
+              observer.next(nextTierTags);
+              console.log(nextTierTags);
+            });
+          });
+        }
+      )
+    }
+
+    public static getFirstObjectValue(object: any) : any{
+       let tagKey = Object.keys(object)[0];
+       let toReturn = object[tagKey];
+       return  toReturn;
     }
 
 
