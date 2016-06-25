@@ -28,6 +28,19 @@ export class FireService {
      })
     }
 
+    public getArrayIndexes(path: string, orderByPath?: string): Observable<any[]> {
+      return Observable.create((observer) => {
+        this.firebase.child(path).once('value', (snapshot) => {
+          console.log(snapshot.val());
+          var array = $.map(snapshot.val(), function(value, index) {
+                return [index];
+            });
+            
+          observer.next(array);
+        });
+     })
+    }
+
     public set(pathToSaveDataTo: string, dataToSave: any) {
        let locationReference = this.firebase.child(pathToSaveDataTo);
        locationReference.once("value", snapshot => {
@@ -42,8 +55,28 @@ export class FireService {
             });
          }
        });
-         
     }
+
+    public getNextTierTags(tag: TagModel) {
+      let nextTier = tag.tier + 1;
+      let ref = this.firebase.child('test/tags/' + nextTier);
+      //.startAt(tag.key).endAt(tag.key)
+      ref.once('value', snap => {
+        var tagsOrderedByParent = FireService.convertToArray(snap.val());
+        console.log(tagsOrderedByParent);
+        let nextTierTags: TagModel[] = [];
+        tagsOrderedByParent.forEach(nextTierTag => {
+          let nextTierTagModel: TagModel = nextTierTag;
+          // CONVERT TO TAGMODEL
+        // nextTierTagModel.key = nextTierTag.key;
+          console.log(nextTierTagModel);
+          if (nextTierTagModel.parent && Object.keys(nextTierTagModel.parent)[0] == tag.key)
+            nextTierTags.push(nextTierTagModel);
+        });
+        
+      });
+    }
+
 
     public push(pathToSaveDataTo: string, dataToSave: any) : string {
       let locationReference = this.firebase.child(pathToSaveDataTo);
@@ -57,6 +90,15 @@ export class FireService {
     public static convertToArrayOfKeys(objectToConvert: any): any[] {
       let array: any[] = $.map(objectToConvert, function(value, index) {
           return [index];
+      });
+      return array;
+    }
+
+    public static convertToArray(objectToConvert: any): any[] {
+      let array: any[] = $.map(objectToConvert, function(value, index) {
+        let obj = {};
+        obj[index] = value;
+          return [obj];
       });
       return array;
     }

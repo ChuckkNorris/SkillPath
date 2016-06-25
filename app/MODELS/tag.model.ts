@@ -2,7 +2,12 @@ import {BaseModel} from '../export'
 
 // 'tags/<tierKey>/<tagKey>'
 export class TagModel extends BaseModel {
-    
+
+    constructor(tier: number) {
+        super();
+        this.tier = tier;
+        
+    }
     private _name : string;
     public get name() : string {
         return this._name;

@@ -15,7 +15,7 @@ export class CheckpointService {
        // return this.firebaseService.get("users/" + username);
     }
 
-    public getCheckpointsByTag(tags: any[]) {
+    public getCheckpointsByTags(tags: any[]) {
        let checkpointKeysToGet: string[] = [];
         tags.forEach(tag => {
             this.fireService.get('test/tags/' + tag.tier + '/' + tag.key + '/checkpoints').subscribe(checkpointKeysInTag => {
