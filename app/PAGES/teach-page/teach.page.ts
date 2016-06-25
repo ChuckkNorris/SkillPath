@@ -13,7 +13,7 @@ import {FireService} from '../../SERVICES/fire.service';
 })
 export class TeachPage {
     constructor(private tagService: TagService, private checkpointService: CheckpointService, private fireService: FireService) {
-        this.getTiers();
+       // this.getTiers();
         this.selectedTier1Tag.name = 'Software Development';
     }
     checkpointName: string;
@@ -45,7 +45,16 @@ export class TeachPage {
     }
 
     getTags() {
-        this.fireService.getNextTierTags(this.selectedTier1Tag);
+        this.tagService.getNextTierTags(this.selectedTier1Tag).subscribe(nextTierTags => {
+            let nextTierTagModels: TagModel[] = [];
+            nextTierTags.forEach(x => {
+                nextTierTagModels.push(x);
+                console.log('KEYS');
+                console.log(x.key);
+            })
+            this.tier2Tags = nextTierTagModels;
+            console.log(this.tier2Tags);  
+        });
     }
 
     createTierOneTag() {
@@ -71,7 +80,7 @@ export class TeachPage {
     }
 
     tier1Tags: string[] = [];
-    tier2Tags: string[] = [];
+    tier2Tags: TagModel[] = [];
     tier3Tags: string[] = [];
     tier4Tags: string[] = [];
 
