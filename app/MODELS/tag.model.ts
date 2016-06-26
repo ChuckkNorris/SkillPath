@@ -12,12 +12,12 @@ export class TagModel extends BaseModel {
         // }
         // , tagObject?: any
     }
-    private _name : string;
-    public get name() : string {
-        return this._name;
+    public name : string;
+    public get _name() : string {
+        return this.name;
     }
-    public set name(v : string) {
-        this._name = v;
+    public set _name(v : string) {
+        this.name = v;
         this.key = v;
     }
     tier: number;
@@ -26,7 +26,7 @@ export class TagModel extends BaseModel {
 
     public toFirebaseObject(): any {
         let toReturn = {
-            name: this._name,
+            name: this.name,
         };
         return toReturn;
     }

@@ -15,13 +15,13 @@ import {Observable} from 'rxjs/rx';
 export class TeachPage {
     constructor(private tagService: TagService, private checkpointService: CheckpointService, private fireService: FireService) {
        // this.getTiers();
-        this.selectedTier1Tag.name = 'Software Development';
+       this.getFirstTierTags();
     }
     checkpoint: CheckpointModel = new CheckpointModel;
-    tier1Tags: string[] = [];
+    tier1Tags: TagModel[] = [];
     tier2Tags: TagModel[] = [];
-    tier3Tags: string[] = [];
-    tier4Tags: string[] = [];
+    tier3Tags: TagModel[] = [];
+    tier4Tags: TagModel[] = [];
 
     selectedTier1Tag: TagModel = new TagModel(1);
     selectedTier2Tag: TagModel = new TagModel(2);
@@ -47,7 +47,17 @@ export class TeachPage {
 
    
     // - Tags - //
-    getNextTierTags(tag: TagModel): Observable<TagModel[]> {
+    getFirstTierTags() {
+            this.tagService.getTagsAtTier(1).subscribe(tier1Tags => {
+                let nextTierTagModels: TagModel[] = [];
+                tier1Tags.forEach(x => {
+                    nextTierTagModels.push(x);
+                })
+                this.tier1Tags = nextTierTagModels
+            });
+    }
+
+    private getNextTierTags(tag: TagModel): Observable<TagModel[]> {
         return Observable.create(observer => {
             this.tagService.getNextTierTags(tag).subscribe(nextTierTags => {
                 let nextTierTagModels: TagModel[] = [];
@@ -60,13 +70,11 @@ export class TeachPage {
        
     }
 
-    createTierOneTag() {
-        this.tagService.createTag(this.selectedTier1Tag);
+    createTag(tag: TagModel) {
+        this.tagService.createTag(tag);
     }
 
-    createTierTwoTag() {
-        this.tagService.createTag(this.selectedTier2Tag);
-    }
+    // - On Tags Changed - //
 
     tag1Change(event: Event) {
         this.getNextTierTags(this.selectedTier1Tag).subscribe(tags => {
@@ -74,25 +82,11 @@ export class TeachPage {
         })
     }
 
-    tag2Change( event: Event) {    
-        this.selectedTier2Tag.tier = 2;
-        // Change values to all where parent == tag
-       this.selectedTier2Tag.parent = this.selectedTier1Tag;
-       console.log(this.selectedTier2Tag);
-    }
-
-
-
-    
-    createTagAtTier(tier: number, tagName: string){
-        //this.checkpointService.testRun();  
-        // this.tagService.addTagToTier(tier, tagName);
-    }
-    getTiers() {
-        this.tagService.getTagsAtTier(1).subscribe(tags => {this.tier1Tags = tags;});
-        this.tagService.getTagsAtTier(2).subscribe(tags => this.tier2Tags = tags);
-        this.tagService.getTagsAtTier(3).subscribe(tags => this.tier3Tags = tags);
-        this.tagService.getTagsAtTier(4).subscribe(tags => this.tier4Tags = tags);
+    tag2Change( event: Event) {  
+        this.selectedTier2Tag.parent = this.selectedTier1Tag;  
+         this.getNextTierTags(this.selectedTier2Tag).subscribe(tags => {
+            this.tier3Tags = tags;
+        })
     }
 
      getSelectedTagsAsArray(): TagModel[] {

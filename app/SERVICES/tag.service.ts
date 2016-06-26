@@ -7,9 +7,7 @@ import { Observable, Observer } from 'rxjs/rx';
 export class TagService {
     constructor(private fireService: FireService) {}
 
-    getTagsAtTier(tier: number): Observable<string[]> {
-        return this.fireService.getArray('tags/' + tier);
-    }
+   
 
     public createTag(tag: TagModel) {
         let tagPath = 'tags/' + tag.tier + '/' + tag.key;
@@ -26,35 +24,53 @@ export class TagService {
         });
     }
 
-     public getNextTierTags(tag: TagModel): Observable<TagModel[]> {
-        let nextTier = tag.tier + 1;
-        
+    getTagsAtTier(tier: number): Observable<TagModel[]> {
+        return Observable.create(observe => {
+            this.fireService.get('tags/' + tier).subscribe(tagObjects => {
+                let toReturn = this.getTagsFromObjects(tagObjects, tier);
+                observe.next(toReturn);
+            })
+        });
+    }
+
+    public getNextTierTags(parentTag: TagModel): Observable<TagModel[]> {
+        let nextTier = parentTag.tier + 1;
           return Observable.create(observer => {
               this.fireService.get('tags/' + nextTier).subscribe(tagsArray => {
-                var tagsOrderedByParent = FireService.convertToArray(tagsArray);
-                console.log(tagsOrderedByParent);
-                let nextTierTags: TagModel[] = [];
-                tagsOrderedByParent.forEach(nextTierTag => {
-                    let potentialTag: TagModel = new TagModel(); 
-                    potentialTag.key = Object.keys(nextTierTag)[0];
-                    potentialTag.tier = nextTier;
-                    
-                    let parentKeys = FireService.getFirstObjectValue(nextTierTag).parents;
-                    let parentKeysAsArray = FireService.convertToArrayOfKeys(parentKeys);
-
-                    parentKeysAsArray.forEach(parentKey => {
-                        if (parentKey == tag.key) {
-                            potentialTag.parent = parentKey;
-                            nextTierTags.push(potentialTag);
-                        }   
-                    });
-                
-                
-                });
-                observer.next(nextTierTags);
+                observer.next(this.getTagsFromObjects(tagsArray, nextTier, parentTag.key));
             });
             }
         )
+    }
+
+    private getTagsFromObjects(tagObjects: any, tier: number, parentTagKey?: string): TagModel[] {
+        
+        var allTags = FireService.convertToArray(tagObjects);
+        console.log(allTags);
+        let tagsToReturn: TagModel[] = [];
+        allTags.forEach(tag => {
+            let potentialTag: TagModel = new TagModel();
+            let tagKey = Object.keys(tag)[0];
+            potentialTag._name = tag[tagKey].name;
+            potentialTag.key = tagKey;
+            potentialTag.tier = tier;
+            
+            if (parentTagKey) {
+                let parentKeys = FireService.getFirstObjectValue(tag).parents;
+                let parentKeysAsArray = FireService.convertToArrayOfKeys(parentKeys);
+
+                parentKeysAsArray.forEach(parentKey => {
+                    if (parentKey == parentTagKey) {
+                        potentialTag.parent = parentKey;
+                        tagsToReturn.push(potentialTag);
+                    }   
+                });
+            }
+            else if (tier == 1){
+                tagsToReturn.push(potentialTag);
+            }
+        });
+        return  tagsToReturn;
     }
 
 

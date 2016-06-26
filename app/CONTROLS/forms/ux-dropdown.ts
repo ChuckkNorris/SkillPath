@@ -31,17 +31,36 @@ export class UxDropdown implements OnInit, OnChanges {
 
   ngOnInit() {
       $('select').material_select();
-   
-      this.createBoundCollection();
+    console.log(this.model);
+   //   this.createBoundCollection();
   }
 
   ngOnChanges() {
-    this.createBoundCollection();
+  //  if (this.boundCollection.length == 0 ) // || !this.collectionMatchesOptions()
+      this.createBoundCollection();
+  }
+
+  private collectionMatchesOptions(): boolean {
+    this.options.forEach(option => {
+      let optionExists = false;
+      this.boundCollection.forEach(boundObject => {
+        let optionValue = option[this.valueProperty];
+        if (boundObject.value == optionValue)
+          optionExists = true;
+      });
+      if (!optionExists)
+        return false;
+    });
+    return true;
   }
 
   @Output() modelChange = new EventEmitter();
   onChange(event){
-    this.modelChange.emit(event);
+    this.options.forEach(option => {
+      if (option[this.valueProperty] == event)
+        this.modelChange.emit(option);
+    })
+   // this.modelChange.emit(this.model);
   }
 
   createBoundCollection() {
