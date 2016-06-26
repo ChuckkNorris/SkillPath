@@ -2,25 +2,28 @@
      <div class="row">
         <div class="col s3 m3 l3">
             <ux-dropdown [(model)]="selectedTier1Tag"
-                (modelChange)="tag1Change($event)"
+                (modelChange)="onTagChanged(selectedTier1Tag)"
                 [label]="'Select Path'" 
                 [options]="tier1Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
                 
         </div>
         <div class="col s3 m3 l3">
-            <ux-dropdown [(model)]="selectedTier2Tag" 
+            <ux-dropdown [(model)]="selectedTier2Tag"
+                (modelChange)="onTagChanged(selectedTier2Tag);"
                 [label]="'Select Focus Area'" 
                 [options]="tier2Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
                 
         </div>
         <div class="col s3 m3 l3">
-            <ux-dropdown [(model)]="selectedTier3Tag" 
+            <ux-dropdown [(model)]="selectedTier3Tag"
+                (modelChange)="onTagChanged(selectedTier3Tag);"
                 [label]="'Select Technology'" 
                 [options]="tier3Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
         </div>
 
         <div class="col s3 m3 l3">
-            <ux-dropdown [(model)]="selectedTier4Tag" 
+            <ux-dropdown [(model)]="selectedTier4Tag"
+                (modelChange)="onTagChanged(selectedTier4Tag);"
                 [label]="'Select Category'" 
                 [options]="tier4Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
         </div>
@@ -33,21 +36,21 @@
             <ux-button (click)="createTag(selectedTier1Tag)">Create T1 Tag</ux-button>
         </div>
         <div [hidden]="!selectedTier1Tag.name" class="col s3 m3 l3">
-            <ux-text [(text)]="selectedTier2Tag.name" (textChange)="onTagChanged(selectedTier2Tag);($event)" [label]="'Tag Name'"></ux-text>
+            <ux-text [(text)]="selectedTier2Tag.name" (textChange)="onTagChanged(selectedTier2Tag);" [label]="'Tag Name'"></ux-text>
             <ux-button (click)="createTag(selectedTier2Tag)">Create T2 Tag</ux-button>
         </div>
           <div [hidden]="!selectedTier2Tag.name" class="col s3 m3 l3">
-            <ux-text [(text)]="selectedTier3Tag.name" (textChange)="onTagChanged(selectedTier3Tag)" [label]="'Tag Name'"></ux-text>
+            <ux-text [(text)]="selectedTier3Tag.name" (textChange)="onTagChanged(selectedTier3Tag);" [label]="'Tag Name'"></ux-text>
             <ux-button (click)="createTag(selectedTier3Tag)">Create T3 Tag</ux-button>
         </div>
           <div [hidden]="!selectedTier3Tag.name" class="col s3 m3 l3">
-            <ux-text [(text)]="selectedTier4Tag.name" (textChange)="onTagChanged(selectedTier4Tag)" [label]="'Tag Name'"></ux-text>
+            <ux-text [(text)]="selectedTier4Tag.name" (textChange)="onTagChanged(selectedTier4Tag);" [label]="'Tag Name'"></ux-text>
             <ux-button (click)="createTag(selectedTier4Tag)">Create T4 Tag</ux-button>
         </div>
     </div>
     <div class="row">
         <label> Checkpoints </label>
-        <ux-text [(text)]="checkpointName" [label]="'Checkpoint Name'"></ux-text>
+        <ux-text [(text)]="checkpoint.name" [label]="'Checkpoint Name'"></ux-text>
         <ux-button (click)="createCheckpoint();" [icon]="'person'">Create New Checkpoint</ux-button>
         <ux-button (click)="getCheckpoints();" [icon]="'person'">Get Checkpoints</ux-button>
     </div>

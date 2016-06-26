@@ -33,7 +33,8 @@ export class TeachPage {
 
     // - Checkpoints - // 
     createCheckpoint(){
-        this.checkpointService.createCheckpoint(this.selectedTags, this.checkpoint);
+        let tags = this.getSelectedTagsAsArray();
+        this.checkpointService.createCheckpoint(tags, this.checkpoint);
     }
 
     getCheckpoints() {

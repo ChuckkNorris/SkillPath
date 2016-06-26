@@ -28,7 +28,7 @@ export class CheckpointService {
       });
     }
 
-    public createCheckpoint(tags: any[], checkpoint: any) {
+    public createCheckpoint(tags: any[], checkpoint: CheckpointModel) {
         let checkpointKey = this.fireService.push('checkpoints', checkpoint);
         // Add checkpoint under each related tag
         tags.forEach(tag => {
