@@ -18,7 +18,7 @@ export class CheckpointService {
     public getCheckpointsByTags(tags: any[]) {
        let checkpointKeysToGet: string[] = [];
         tags.forEach(tag => {
-            this.fireService.get('test/tags/' + tag.tier + '/' + tag.key + '/checkpoints').subscribe(checkpointKeysInTag => {
+            this.fireService.get('tags/' + tag.tier + '/' + tag.key + '/checkpoints').subscribe(checkpointKeysInTag => {
                 let tagKeys:string[] = FireService.convertToArrayOfKeys(checkpointKeysInTag);
                 if (checkpointKeysToGet.length == 0)
                     checkpointKeysToGet = tagKeys;
@@ -29,10 +29,10 @@ export class CheckpointService {
     }
 
     public createCheckpoint(tags: any[], checkpoint: any) {
-        let checkpointKey = this.fireService.push('test/checkpoints', checkpoint);
+        let checkpointKey = this.fireService.push('checkpoints', checkpoint);
         // Add checkpoint under each related tag
         tags.forEach(tag => {
-            this.fireService.set('test/tags/' + tag.tier + '/' + tag.key + '/checkpoints/' + checkpointKey, true)
+            this.fireService.set('tags/' + tag.tier + '/' + tag.key + '/checkpoints/' + checkpointKey, true)
         });
     }
 

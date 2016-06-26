@@ -3,15 +3,14 @@ import {BaseModel} from '../export'
 // 'tags/<tierKey>/<tagKey>'
 export class TagModel extends BaseModel {
 
-    constructor(tier?: number, tagObject?: any) {
+    constructor(tier?: number) {
         super();
         if (tier)
             this.tier = tier;
-        if (tagObject) {
-            this.createTagFromObject(tagObject);
-        }
-
-        
+        // if (tagObject) {
+        //     this.createTagFromObject(tagObject);
+        // }
+        // , tagObject?: any
     }
     private _name : string;
     public get name() : string {
@@ -25,7 +24,20 @@ export class TagModel extends BaseModel {
 
     parent: TagModel;
 
-    private createTagFromObject(tagObject: any) {
+    public toFirebaseObject(): any {
+        let toReturn = {
+            name: this._name,
+        };
+        return toReturn;
+    }
+
+    private removeUnderstoreKeys(object: any): any{
         
     }
+
+   
+}
+
+class TagFirebaseModel {
+
 }

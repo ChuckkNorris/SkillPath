@@ -3,6 +3,7 @@ import {  CheckpointService } from '../../SERVICES/checkpoint.service';
 import {CheckpointModel, TagModel } from "../../export";
 import {TagService} from '../../SERVICES/tag.service';
 import {FireService} from '../../SERVICES/fire.service';
+import {Observable} from 'rxjs/rx';
 
 @Component({
     moduleId: 'app/PAGES/teach-page/',
@@ -16,16 +17,26 @@ export class TeachPage {
        // this.getTiers();
         this.selectedTier1Tag.name = 'Software Development';
     }
+    checkpoint: CheckpointModel = new CheckpointModel;
+    tier1Tags: string[] = [];
+    tier2Tags: TagModel[] = [];
+    tier3Tags: string[] = [];
+    tier4Tags: string[] = [];
+
+    selectedTier1Tag: TagModel = new TagModel(1);
+    selectedTier2Tag: TagModel = new TagModel(2);
+    selectedTier3Tag: TagModel = new TagModel(3);
+    selectedTier4Tag: TagModel = new TagModel(4);
+
     checkpointName: string;
     selectedTags:TagModel[] = [];
 
+    // - Checkpoints - // 
     createCheckpoint(){
         let tags = this.getSelectedTagsAsArray();
-
         this.selectedTags = tags;
         let checkpoint: CheckpointModel = new CheckpointModel();
         checkpoint.name = "checkpointName";
-        
         this.checkpointService.createCheckpoint(tags, checkpoint);
     }
 
@@ -34,27 +45,19 @@ export class TeachPage {
         this.checkpointService.getCheckpointsByTags(tags);
     }
 
-    getSelectedTagsAsArray(): TagModel[] {
-        let tags: TagModel[] = [
-            this.selectedTier1Tag,
-            this.selectedTier2Tag,
-            this.selectedTier3Tag,
-            this.selectedTier4Tag
-        ];
-        return tags;
-    }
-
-    getTags() {
-        this.tagService.getNextTierTags(this.selectedTier1Tag).subscribe(nextTierTags => {
-            let nextTierTagModels: TagModel[] = [];
-            nextTierTags.forEach(x => {
-                nextTierTagModels.push(x);
-                console.log('KEYS');
-                console.log(x.key);
-            })
-            this.tier2Tags = nextTierTagModels;
-            console.log(this.tier2Tags);  
-        });
+   
+    // - Tags - //
+    getNextTierTags(tag: TagModel): Observable<TagModel[]> {
+        return Observable.create(observer => {
+            this.tagService.getNextTierTags(tag).subscribe(nextTierTags => {
+                let nextTierTagModels: TagModel[] = [];
+                nextTierTags.forEach(x => {
+                    nextTierTagModels.push(x);
+                })
+                observer.next(nextTierTagModels);
+            });
+        })
+       
     }
 
     createTierOneTag() {
@@ -66,10 +69,9 @@ export class TeachPage {
     }
 
     tag1Change(event: Event) {
-        this.selectedTier1Tag.tier = 1;
-        // Change values to all where parent == tag
-        // this.tier2Tags = this.checkpointService.getNextTierTags();
-       // this.fireService.getNextTierTags(this.selectedTier1Tag);
+        this.getNextTierTags(this.selectedTier1Tag).subscribe(tags => {
+            this.tier2Tags = tags;
+        })
     }
 
     tag2Change( event: Event) {    
@@ -79,17 +81,9 @@ export class TeachPage {
        console.log(this.selectedTier2Tag);
     }
 
-    tier1Tags: string[] = [];
-    tier2Tags: TagModel[] = [];
-    tier3Tags: string[] = [];
-    tier4Tags: string[] = [];
 
-    selectedTier1Tag: TagModel = new TagModel(1);
-    selectedTier2Tag: TagModel = new TagModel(2);
-    selectedTier3Tag: TagModel = new TagModel(3);
-    selectedTier4Tag: TagModel = new TagModel(4);
 
-    private checkpoint: CheckpointModel = new CheckpointModel;
+    
     createTagAtTier(tier: number, tagName: string){
         //this.checkpointService.testRun();  
         // this.tagService.addTagToTier(tier, tagName);
@@ -99,6 +93,16 @@ export class TeachPage {
         this.tagService.getTagsAtTier(2).subscribe(tags => this.tier2Tags = tags);
         this.tagService.getTagsAtTier(3).subscribe(tags => this.tier3Tags = tags);
         this.tagService.getTagsAtTier(4).subscribe(tags => this.tier4Tags = tags);
+    }
+
+     getSelectedTagsAsArray(): TagModel[] {
+        let tags: TagModel[] = [
+            this.selectedTier1Tag,
+            this.selectedTier2Tag,
+            this.selectedTier3Tag,
+            this.selectedTier4Tag
+        ];
+        return tags;
     }
 
 }
