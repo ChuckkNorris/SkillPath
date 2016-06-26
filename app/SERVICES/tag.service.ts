@@ -15,19 +15,38 @@ export class TagService {
             if (!tagExists) {
                 let tagToSave = tag.toFirebaseObject();
                 this.fireService.set(tagPath, tagToSave).subscribe(() => {
-                    if (tag.parent)
-                        this.fireService.set(tagPath + '/parents/' + tag.parent.key, true).subscribe();
+                    this.setAllParents(tagPath, tag);
                 });
             }
-            else if (tag.parent)
-                this.fireService.set(tagPath + '/parents/' + tag.parent.key, true).subscribe();
+            else {
+              this.setAllParents(tagPath, tag);
+            }
         });
     }
 
-    getTagsAtTier(tier: number): Observable<TagModel[]> {
+    private setAllParents(tagKeyPath: string, childTag: TagModel) {
+        if (childTag.parent){ 
+            this.setParentTag(tagKeyPath, childTag.parent);
+            if (childTag.parent.parent){ 
+                this.setParentTag(tagKeyPath, childTag.parent.parent);
+                if (childTag.parent.parent.parent){ 
+                    this.setParentTag(tagKeyPath, childTag.parent.parent.parent);
+                }
+            }
+        }
+        
+    }
+
+    private setParentTag(tagKeyPath: string, parentTag: TagModel) {
+        let parentKey = TagModel.formatParentKey(parentTag);
+        let parentPath = tagKeyPath + '/parents/' + parentKey;
+        this.fireService.set(parentPath, true).subscribe();
+    }
+
+    public getTagsAtTier(tier: number): Observable<TagModel[]> {
         return Observable.create(observe => {
             this.fireService.get('tags/' + tier).subscribe(tagObjects => {
-                let toReturn = this.getTagsFromObjects(tagObjects, tier);
+                let toReturn = this.getRelatedTagsFromObjects(tagObjects, tier);
                 observe.next(toReturn);
             })
         });
@@ -35,15 +54,15 @@ export class TagService {
 
     public getNextTierTags(parentTag: TagModel): Observable<TagModel[]> {
         let nextTier = parentTag.tier + 1;
-          return Observable.create(observer => {
+        return Observable.create(observer => {
               this.fireService.get('tags/' + nextTier).subscribe(tagsArray => {
-                observer.next(this.getTagsFromObjects(tagsArray, nextTier, parentTag.key));
+                
+                observer.next(this.getRelatedTagsFromObjects(tagsArray, nextTier, parentTag));
             });
-            }
-        )
+        });
     }
 
-    private getTagsFromObjects(tagObjects: any, tier: number, parentTagKey?: string): TagModel[] {
+    private getRelatedTagsFromObjects(tagObjects: any, tier: number, parentTag?: TagModel): TagModel[] {
         
         var allTags = FireService.convertToArray(tagObjects);
         console.log(allTags);
@@ -55,16 +74,23 @@ export class TagService {
             potentialTag.key = tagKey;
             potentialTag.tier = tier;
             
-            if (parentTagKey) {
+            if (parentTag) {
+                let tagContainsAllSelectedParents = true;
+                let subsequentParentKeys: string[] = TagModel.getAllParentKeysFormatted(parentTag);
+               
                 let parentKeys = FireService.getFirstObjectValue(tag).parents;
                 let parentKeysAsArray = FireService.convertToArrayOfKeys(parentKeys);
+                // ['1_test1', '2_test2'];
+                subsequentParentKeys.forEach(requiredParentKey => {
 
-                parentKeysAsArray.forEach(parentKey => {
-                    if (parentKey == parentTagKey) {
-                        potentialTag.parent = parentKey;
-                        tagsToReturn.push(potentialTag);
-                    }   
+                    if (!parentKeysAsArray.includes(requiredParentKey))
+                        tagContainsAllSelectedParents = false;
+                    
                 });
+                if (tagContainsAllSelectedParents) {
+                    potentialTag.parent = parentTag;
+                    tagsToReturn.push(potentialTag);
+                }
             }
             else if (tier == 1){
                 tagsToReturn.push(potentialTag);
@@ -72,6 +98,8 @@ export class TagService {
         });
         return  tagsToReturn;
     }
+
+    private 
 
 
    

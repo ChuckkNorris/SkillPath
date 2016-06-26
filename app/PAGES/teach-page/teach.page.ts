@@ -39,7 +39,7 @@ export class TeachPage {
 
     getCheckpoints() {
         let tags = this.getSelectedTagsAsArray();
-        this.checkpointService.getCheckpointsByTags(tags);
+        this.checkpointService.getCheckpointsByTags(tags).subscribe(x => console.log(x));
     }
 
    
@@ -83,10 +83,13 @@ export class TeachPage {
             switch (changedTag.tier) {
                 case 1:
                     this.tier2Tags = tags;
+                    this.tier3Tags = [];
+                    this.tier4Tags = [];
                     break;
                 case 2:
                     this.tier3Tags = tags;
                     this.selectedTier2Tag.parent = this.selectedTier1Tag; 
+                    this.tier4Tags = [];
                     break;
                 case 3:
                     this.tier4Tags = tags;
@@ -137,7 +140,10 @@ export class TeachPage {
             this.selectedTier3Tag,
             this.selectedTier4Tag
         ];
-        return tags;
+        let selectedTags = tags.filter(x => {
+            if(x.key) return true;
+        })
+        return selectedTags;
     }
 
 }

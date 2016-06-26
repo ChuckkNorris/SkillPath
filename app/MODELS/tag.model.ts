@@ -24,6 +24,31 @@ export class TagModel extends BaseModel {
 
     parent: TagModel;
 
+    public static formatParentKey(parentTag: TagModel): string{
+        let toReturn = undefined;
+        if (parentTag)
+            toReturn = parentTag.tier + '_' + parentTag.key;
+        return toReturn;
+    }
+
+    public static getAllParentKeysFormatted(parentTag: TagModel): string[] {
+        let toReturn = [];
+        if (parentTag) {
+            toReturn.push(TagModel.formatParentKey(parentTag));
+            if (parentTag.parent){
+                toReturn.push(TagModel.formatParentKey(parentTag.parent));
+                if (parentTag.parent.parent) {
+                    toReturn.push(TagModel.formatParentKey(parentTag.parent.parent));
+                    if (parentTag.parent.parent.parent) {
+                        toReturn.push(TagModel.formatParentKey(parentTag.parent.parent.parent));
+                    }
+                }
+                
+            }
+        }
+        return  toReturn;
+    }
+
     public toFirebaseObject(): any {
         let toReturn = {
             name: this._name,
