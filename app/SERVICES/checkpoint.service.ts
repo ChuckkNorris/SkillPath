@@ -18,28 +18,31 @@ export class CheckpointService {
     public getCheckpointsByTags(tags: any[]): Observable<CheckpointModel[]> {
         return Observable.create(observer => {
             let checkpointKeysToGet: string[] = [];
+            let hasAnyKeys = true;
             for (var i = 0; i < tags.length; i++) {
                 var tag = tags[i];
                 if (tag) {
                     this.fireService.get('tags/' + tag.tier + '/' + tag.key + '/checkpoints').subscribe(checkpointKeysInTag => {
-                        let tagKeys:string[] = FireService.convertToArrayOfKeys(checkpointKeysInTag);
-                        if (checkpointKeysToGet.length == 0)
-                            checkpointKeysToGet = tagKeys;
-                        else 
-                            checkpointKeysToGet = FireService.getDuplicates(checkpointKeysToGet, tagKeys);
-                        if (i == tags.length-1){
-                            let toReturn: CheckpointModel[] = [];
-                            for (var keyIndex = 0; keyIndex < checkpointKeysToGet.length; keyIndex++) {
-                                var checkpointKey = checkpointKeysToGet[keyIndex];
-                                this.getCheckpoint(checkpointKey).subscribe(checkpointToAdd => {
-                                    toReturn.push(checkpointToAdd);
-                                    console.log(checkpointToAdd);
-                                    if (keyIndex == checkpointKeysToGet.length - 1)
-                                        observer.next(toReturn);
-                                });
-
-                                
-                                
+                        if (!checkpointKeysInTag)
+                            hasAnyKeys = false;
+                        if (hasAnyKeys){
+                            let tagKeys:string[] = FireService.convertToArrayOfKeys(checkpointKeysInTag);
+                            if (checkpointKeysToGet.length == 0)
+                                checkpointKeysToGet = tagKeys;
+                            else 
+                                checkpointKeysToGet = FireService.getDuplicates(checkpointKeysToGet, tagKeys);
+                            console.log('Index = ' + i);
+                            if (i == tags.length-1){
+                                let toReturn: CheckpointModel[] = [];
+                                for (var keyIndex = 0; keyIndex < checkpointKeysToGet.length; keyIndex++) {
+                                    var checkpointKey = checkpointKeysToGet[keyIndex];
+                                    this.getCheckpoint(checkpointKey).subscribe(checkpointToAdd => {
+                                        toReturn.push(checkpointToAdd);
+                                        console.log(checkpointToAdd);
+                                        if (keyIndex == checkpointKeysToGet.length - 1)
+                                            observer.next(toReturn);
+                                    });
+                                }
                             }
                         }
                     });
