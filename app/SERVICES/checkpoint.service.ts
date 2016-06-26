@@ -32,7 +32,7 @@ export class CheckpointService {
         let checkpointKey = this.fireService.push('checkpoints', checkpoint);
         // Add checkpoint under each related tag
         tags.forEach(tag => {
-            this.fireService.set('tags/' + tag.tier + '/' + tag.key + '/checkpoints/' + checkpointKey, true)
+            this.fireService.set('tags/' + tag.tier + '/' + tag.key + '/checkpoints/' + checkpointKey, true).subscribe();
         });
     }
 

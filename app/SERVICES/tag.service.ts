@@ -20,7 +20,7 @@ export class TagService {
                 });
             }
             else if (tag.parent)
-                this.fireService.set(tagPath + '/parents/' + tag.parent.key, true);
+                this.fireService.set(tagPath + '/parents/' + tag.parent.key, true).subscribe();
         });
     }
 
@@ -51,7 +51,7 @@ export class TagService {
         allTags.forEach(tag => {
             let potentialTag: TagModel = new TagModel();
             let tagKey = Object.keys(tag)[0];
-            potentialTag._name = tag[tagKey].name;
+            potentialTag.name = tag[tagKey].name;
             potentialTag.key = tagKey;
             potentialTag.tier = tier;
             
