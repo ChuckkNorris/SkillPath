@@ -1,18 +1,35 @@
-<nav class="teal lighten-2">
-    <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">
-          
-            <img src="./assets/skillpath-logo-small.png" alt="">
-        </a>
-        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-        <ul class="right hide-on-med-and-down">
-            <li [class.active]="routeIsActive('/')"><a [routerLink]="['/']" >Learn</a></li>
-            <li [class.active]="routeIsActive('Teach')"><a [routerLink]="['Teach']" >Teach</a></li>
-        </ul>
-        <ul class="side-nav" id="mobile-demo">
-            <li [class.active]="routeIsActive('/')"><a [routerLink]="['/']" >Learn</a></li>
-            <li [class.active]="routeIsActive('/Teach')"><a [routerLink]="['/Teach']" >Teach</a></li>
-        </ul>
-    </div>
-</nav>
-<router-outlet></router-outlet>
+
+    <nav class="teal lighten-1">
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo">
+            
+                <img src="./assets/skillpath-logo-small.png" alt="">
+            </a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li [class.active]="routeIsActive('/')"><a [routerLink]="['/']" >Learn</a></li>
+                <li [class.active]="routeIsActive('Teach')"><a [routerLink]="['Teach']" >Teach</a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+                <li [class.active]="routeIsActive('/')"><a [routerLink]="['/']" >Learn</a></li>
+                <li [class.active]="routeIsActive('/Teach')"><a [routerLink]="['/Teach']" >Teach</a></li>
+            </ul>
+        </div>
+    </nav>
+    <router-outlet ></router-outlet>
+
+    <footer class="page-footer teal lighten-2">
+        <div class="container" >
+            <div class="row">
+                <div class="col l6 s12">
+                    <h6 class="white-text">"Don’t let your learning lead to knowledge. Let your learning lead to action."</h6>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2016 SkillPath.io
+                <a class="grey-text text-lighten-4 right" href="#!">About Me</a>
+            </div>
+        </div>
+    </footer>

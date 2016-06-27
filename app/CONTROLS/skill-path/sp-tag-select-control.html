@@ -2,29 +2,32 @@
     <div class="col s3 m3 l3">
         <ux-dropdown [(model)]="selectedTier1Tag"
             (modelChange)="onTagChanged(selectedTier1Tag)"
-            [label]="'Select Path'"
-            [placeholder]="'Choose your path'"
+            [label]="'Path'"
+            [placeholder]="'Choose your Path'"
             [options]="tier1Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
             
     </div>
     <div [hidden]="!tier2Tags.length > 0" class="col s3 m3 l3">
         <ux-dropdown [(model)]="selectedTier2Tag"
             (modelChange)="onTagChanged(selectedTier2Tag);"
-            [label]="'Select Focus Area'" 
+            [label]="'Focus'" 
+            [placeholder]="'Select your Focus'"
             [options]="tier2Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
             
     </div>
     <div [hidden]="!tier3Tags.length > 0" class="col s3 m3 l3">
         <ux-dropdown [(model)]="selectedTier3Tag"
             (modelChange)="onTagChanged(selectedTier3Tag);"
-            [label]="'Select Technology'" 
+            [label]="'Technology'" 
+            [placeholder]="'Choose your Technology'"
             [options]="tier3Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
     </div>
 
     <div [hidden]="!tier4Tags.length > 0" class="col s3 m3 l3">
         <ux-dropdown [(model)]="selectedTier4Tag"
             (modelChange)="onTagChanged(selectedTier4Tag);"
-            [label]="'Select Category'" 
+            [label]="'Category'"
+            [placeholder]="'Select a Category'"
             [options]="tier4Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
     </div>
     

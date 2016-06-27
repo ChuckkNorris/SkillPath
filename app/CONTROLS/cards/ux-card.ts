@@ -39,7 +39,7 @@ import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
         <div class="card">
             <div class="card-image">
                 <iframe *ngIf="iframeUrl" class="dimmed" [src]="iframeUrl" ></iframe>
-                
+                <img class="dimmed" *ngIf="imageUrl" class="dimmed" [src]="imageUrl"></iframe>
             </div>
            
             <div class="card-content" (mouseenter)="onMouseEnterDescription();" (mouseleave)="onMouseLeaveDescription();" >
