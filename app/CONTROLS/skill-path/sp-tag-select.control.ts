@@ -66,16 +66,23 @@ export class SpTagSelectControl {
                 case 1:
                 
                     this.tier2Tags = tags;
+                    this.selectedTier2Tag.key = undefined;
                     this.tier3Tags = [];
+                    this.selectedTier3Tag.key = undefined;
+
                     this.tier4Tags = [];
+                    this.selectedTier4Tag.key = undefined;
                     break;
                 case 2:
                     this.tier3Tags = tags;
+                    this.selectedTier3Tag.key = undefined;
                     this.selectedTier2Tag.parent = this.selectedTier1Tag; 
                     this.tier4Tags = [];
+                    this.selectedTier4Tag.key = undefined;
                     break;
                 case 3:
                     this.tier4Tags = tags;
+                    this.selectedTier4Tag.key = undefined;
                     this.selectedTier3Tag.parent = this.selectedTier2Tag; 
                     break;
                 case 4:

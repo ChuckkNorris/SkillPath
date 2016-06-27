@@ -1,7 +1,7 @@
 import {Component, EventEmitter, ViewChild, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {CheckpointService} from '../../SERVICES/checkpoint.service';
-import { CheckpointModel } from '../../export';
+import { CheckpointModel, TagModel } from '../../export';
 import {MaterializeDirective, toast} from "angular2-materialize";
 import {Platform} from '../../MODELS/platform.model';
 import * as Materialize from 'angular2-materialize';
@@ -28,6 +28,20 @@ export class LearnPage implements OnInit {
         this.categories = [{id:1,CategoryTitle:"bla1"},{id:2,CategoryTitle:"bla2"},{id:3,CategoryTitle:"bla3"}];
 
     }
+    tagsChanged(selectedTags) {
+        this.getCheckpoints(selectedTags);
+    }
+
+     getCheckpoints(selectedTags: TagModel[]) {
+        this.checkpointService.getCheckpointsByTags(selectedTags).subscribe(checkpoints => {
+            // TODO: Change to use Child Added so you don't have to clear the collection each time
+            this.checkpoints = [];
+            checkpoints.forEach(checkpoint => {
+                this.checkpoints.push(checkpoint);
+            });
+        });
+    }
+
 
     categories = [];
     modelCategoryId=3;

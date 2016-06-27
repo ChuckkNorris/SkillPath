@@ -1,45 +1,16 @@
 <ux-container>
-    <div class="row">
-        <div class="col s3 m3 l3">
-            <ux-dropdown [(model)]="myModel" 
-                [label]="'Select Platform'" 
-                [options]="platforms" 
-                [placeholder]="'Bro, select it!'"
-                [nameProperty]="'name'" 
-                [valueProperty]="'id'"></ux-dropdown>
-        </div>
-        <div class="col s3 m3 l3">
-            <ux-dropdown [(model)]="myModel" 
-                [label]="'Select Area'" 
-                [options]="platforms" 
-                [placeholder]="'Bro, select it!'"
-                [nameProperty]="'name'" 
-                [valueProperty]="'id'"></ux-dropdown>
-        </div>
-        <div class="col s3 m3 l3">
-            <ux-dropdown [(model)]="myModel" 
-                [label]="'Select Focus'" 
-                [options]="platforms" 
-                [placeholder]="'Bro, select it!'"
-                [nameProperty]="'name'" 
-                [valueProperty]="'id'"></ux-dropdown>
-        </div>
-        <div class="col s3 m3 l3">
-            <ux-dropdown [(model)]="myModel" 
-                [label]="'Select Platform'" 
-                [options]="platforms" 
-                [placeholder]="'Bro, select it!'"
-                [nameProperty]="'name'" 
-                [valueProperty]="'id'"></ux-dropdown>
-        </div>
-    </div>
-    <ux-button (click)="navigateToCheckpoint()" [icon]="'send'">Checkpoint Sample</ux-button>
-    
-
-    
-    {{myModel}}
+    <sp-tag-select-control (selectedTagsChanged)="getCheckpoints($event);"></sp-tag-select-control>
+   
 </ux-container>   
-<ux-card [title]="'Super Cool Tutorial'" [description]="'There was once a man named Bardyo that never had a shardy'"></ux-card>
-<ux-card [title]="'Super Cool Tutorial'" [description]="'There was once a man named Bardyo that never had a shardy'"></ux-card>
+<div class="row">
+        <ux-card *ngFor="let check of checkpoints" 
+            [title]="check.name" 
+            [cardActionName]="'Open'"
+            [cardActionUrl]="check.tutorialUrl"
+            [imageUrl]="check.tutorialUrl" 
+            [description]="check.description">
+        </ux-card>
+</div>
+
 
 
