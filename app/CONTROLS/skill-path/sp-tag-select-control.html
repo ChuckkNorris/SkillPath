@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col s3 m3 l3">
+        <ux-dropdown [(model)]="selectedTier1Tag"
+            (modelChange)="onTagChanged(selectedTier1Tag)"
+            [label]="'Select Path'"
+            [placeholder]="'Choose your path'"
+            [options]="tier1Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
+            
+    </div>
+    <div [hidden]="!tier2Tags.length > 0" class="col s3 m3 l3">
+        <ux-dropdown [(model)]="selectedTier2Tag"
+            (modelChange)="onTagChanged(selectedTier2Tag);"
+            [label]="'Select Focus Area'" 
+            [options]="tier2Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
+            
+    </div>
+    <div [hidden]="!tier3Tags.length > 0" class="col s3 m3 l3">
+        <ux-dropdown [(model)]="selectedTier3Tag"
+            (modelChange)="onTagChanged(selectedTier3Tag);"
+            [label]="'Select Technology'" 
+            [options]="tier3Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
+    </div>
+
+    <div [hidden]="!tier4Tags.length > 0" class="col s3 m3 l3">
+        <ux-dropdown [(model)]="selectedTier4Tag"
+            (modelChange)="onTagChanged(selectedTier4Tag);"
+            [label]="'Select Category'" 
+            [options]="tier4Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
+    </div>
+    
+</div>

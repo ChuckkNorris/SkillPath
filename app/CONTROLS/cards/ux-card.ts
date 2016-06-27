@@ -24,10 +24,11 @@ import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
             background: rgba(0, 0, 0, 0.5);
         }
         span {
-            color: white;
+            color: black;
             z-index: 2;
         }
-        img { 
+        iframe { 
+            z-index: 0;
             max-width: 300px; 
             max-height: 300px;
             background-color: white;
@@ -37,15 +38,16 @@ import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
     <div class="static">
         <div class="card">
             <div class="card-image">
-                <img class="dimmed" src="images/sample-1.jpg" >
-                <span class="card-title">{{title}}</span>
+                <iframe *ngIf="iframeUrl" class="dimmed" [src]="iframeUrl" ></iframe>
+                
             </div>
            
             <div class="card-content" (mouseenter)="onMouseEnterDescription();" (mouseleave)="onMouseLeaveDescription();" >
+                <span class="card-title">{{title}}</span>
                 <p>{{description}}</p>
             </div>
             <div *ngIf="cardAction" class="card-action">
-                <a href="#">{{cardAction}}</a>
+                <a [href]="cardActionUrl">{{cardActionName}}</a>
             </div>
         </div>
     <div>
@@ -54,6 +56,7 @@ import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 export class UxCard { 
     @Input() title: string;
     @Input() description: string;
+    @Input() iframeUrl: string;
     @Input() imageUrl: string;
     @Input() cardAction: string;
 

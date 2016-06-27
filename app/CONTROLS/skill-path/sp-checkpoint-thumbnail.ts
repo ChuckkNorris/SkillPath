@@ -1,24 +1,24 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-
+import { TagModel } from '../../export';
+// style="width:400; height:400; display:inline-block;"
 @Component({
     selector: 'sp-checkpoint-thumbnail',
     template: `
-    <div class="card">
+    <div  class="card">
         <div class="card-image">
-            <img src="images/sample-1.jpg">
-            <span class="card-title">{{title}}</span>
+            <iframe *ngIf="model.tutorialUrl" [src]="model.tutorialUrl"></iframe>
+            <span class="card-title">{{model.name}}</span>
         </div>
-        <div class="card-content">
-            <p>{{description}}</p>
+        <div *ngIf="model.description" class="card-content">
+            <p>{{model.description}}</p>
         </div>
-        <div class="card-action">
-            <a href="#">This is a link</a>
+        <div *ngIf="model.tutorialUrl" class="card-action">
+            <a [href]="model.tutorialUrl">{{model.name}}</a>
         </div>
     </div>
     `
 })
 export class SpCheckpointThumbnail { 
-    @Input() title: string;
-    @Input() description: string;
-    @Input() imageUrl: string;
+    @Input() model: TagModel = new TagModel();
+
 }

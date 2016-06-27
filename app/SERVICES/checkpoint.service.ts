@@ -19,12 +19,14 @@ export class CheckpointService {
         return Observable.create(observer => {
             let checkpointKeysToGet: string[] = [];
             let hasAnyKeys = true;
-            for (var i = 0; i < tags.length; i++) {
-                var tag = tags[i];
+            for (let i = 0; i < tags.length; i++) {
+                let tag = tags[i];
                 if (tag) {
                     this.fireService.get('tags/' + tag.tier + '/' + tag.key + '/checkpoints').subscribe(checkpointKeysInTag => {
-                        if (!checkpointKeysInTag)
+                        if (!checkpointKeysInTag) {
                             hasAnyKeys = false;
+                            observer.next([]);
+                        }
                         if (hasAnyKeys){
                             let tagKeys:string[] = FireService.convertToArrayOfKeys(checkpointKeysInTag);
                             if (checkpointKeysToGet.length == 0)
@@ -34,8 +36,9 @@ export class CheckpointService {
                             console.log('Index = ' + i);
                             if (i == tags.length-1){
                                 let toReturn: CheckpointModel[] = [];
-                                for (var keyIndex = 0; keyIndex < checkpointKeysToGet.length; keyIndex++) {
-                                    var checkpointKey = checkpointKeysToGet[keyIndex];
+                                for (let keyIndex = 0; keyIndex < checkpointKeysToGet.length; keyIndex++) {
+                                    let checkpointKey = checkpointKeysToGet[keyIndex];
+                                    
                                     this.getCheckpoint(checkpointKey).subscribe(checkpointToAdd => {
                                         toReturn.push(checkpointToAdd);
                                         console.log(checkpointToAdd);
@@ -59,6 +62,7 @@ export class CheckpointService {
             let checkPointPath = this.fireService.get('checkpoints/' + checkpointKey).subscribe(checkpoint => {
                 toReturn.key = checkpointKey;
                 toReturn.name = checkpoint.name;
+                toReturn.tutorialUrl = checkpoint.tutorialUrl;
                 observer.next(toReturn);
             });
         });

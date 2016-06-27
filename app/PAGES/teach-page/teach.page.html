@@ -1,9 +1,11 @@
 <ux-container>
-     <div class="row">
+    <sp-tag-select-control (selectedTagsChanged)="tagsChanged($event);"></sp-tag-select-control>
+     <!--<div class="row">
         <div class="col s3 m3 l3">
             <ux-dropdown [(model)]="selectedTier1Tag"
                 (modelChange)="onTagChanged(selectedTier1Tag)"
-                [label]="'Select Path'" 
+                [label]="'Select Path'"
+                [placeholder]="'Choose your path'"
                 [options]="tier1Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
                 
         </div>
@@ -28,7 +30,7 @@
                 [options]="tier4Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
         </div>
       
-    </div>
+    </div>-->
 
     <div class="row">
         <div class="col s3 m3 l3">
@@ -51,8 +53,19 @@
     <div class="row">
         <label> Checkpoints </label>
         <ux-text [(text)]="checkpoint.name" [label]="'Checkpoint Name'"></ux-text>
+         <ux-text [(text)]="checkpoint.tutorialUrl" [label]="'Tutorial URL'"></ux-text>
         <ux-button (click)="createCheckpoint();" [icon]="'person'">Create New Checkpoint</ux-button>
         <ux-button (click)="getCheckpoints();" [icon]="'person'">Get Checkpoints</ux-button>
+    </div>
+
+    <div class="row">
+            <ux-card *ngFor="let check of checkpoints" 
+                [title]="check.name" 
+                [cardActionName]="'Open'"
+                [cardActionUrl]="check.tutorialUrl"
+                [iframeUrl]="check.tutorialUrl" 
+                [description]="check.description">
+            </ux-card>
     </div>
     <!--<div class="row">
         <ux-text [(text)]="tier" [label]="'Tier'"></ux-text>

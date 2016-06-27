@@ -65,7 +65,6 @@ export class TagService {
     private getRelatedTagsFromObjects(tagObjects: any, tier: number, parentTag?: TagModel): TagModel[] {
         
         var allTags = FireService.convertToArray(tagObjects);
-        console.log(allTags);
         let tagsToReturn: TagModel[] = [];
         allTags.forEach(tag => {
             let potentialTag: TagModel = new TagModel();

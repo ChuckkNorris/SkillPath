@@ -5,7 +5,10 @@ export abstract class BaseModel {
         return this._key;
     }
     public set key(v : string) {
-        this._key = BaseModel.formatAsKey(v);
+        if (v)
+            this._key = BaseModel.formatAsKey(v);
+        else 
+            this._key = v;
     }
     
     //key: string;
