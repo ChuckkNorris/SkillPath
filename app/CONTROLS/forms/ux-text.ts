@@ -1,16 +1,17 @@
 import {Component, Output, Input, EventEmitter} from '@angular/core';
 
+//     
 @Component({
     selector: 'ux-text',
     template: `
-    <div class="input-field">
-        <i class="material-icons prefix">{{icon}}</i>
+   <div class="input-field">
+        <i *ngIf="icon" class="material-icons prefix">{{icon}}</i> 
         <input id="uxtext" 
             [(ngModel)]="text" 
             (ngModelChange)="textChange.emit($event)" 
             type="text" 
             class="validate">
-        <label for="uxtext">{{label}}</label>
+        <label *ngIf="label" for="uxtext">{{label}}</label>
     </div>
     `
 })

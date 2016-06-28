@@ -1,37 +1,18 @@
 <ux-container>
+    <h2 class="header">Create New Checkpoint</h2>
+     <div class="row">
+        <label> Checkpoints </label>
+        <ux-text [(text)]="checkpoint.name" [label]="'Checkpoint Name'"></ux-text>
+         <ux-text [(text)]="checkpoint.tutorialUrl" [label]="'Tutorial URL'"></ux-text>
+        <ux-button (click)="createCheckpoint();" [icon]="'person'">Create New Checkpoint</ux-button>
+        <ux-button (click)="getCheckpoints();" [icon]="'person'">Get Checkpoints</ux-button>
+    </div>
     <sp-tag-select-control (selectedTagsChanged)="tagsChanged($event);"></sp-tag-select-control>
-     <!--<div class="row">
-        <div class="col s3 m3 l3">
-            <ux-dropdown [(model)]="selectedTier1Tag"
-                (modelChange)="onTagChanged(selectedTier1Tag)"
-                [label]="'Select Path'"
-                [placeholder]="'Choose your path'"
-                [options]="tier1Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
-                
+    <ux-text class="col s3" [(text)]="selectedTier1Tag.name" (textChange)="onTagChanged(selectedTier1Tag);" [label]="'Tag Name'"></ux-text>
+   <div class="col s3 m3 l3">
+            <ux-text [(text)]="selectedTier1Tag.name" (textChange)="onTagChanged(selectedTier1Tag);" [label]="'Tag Name'"></ux-text>
+            <ux-button (click)="createTag(selectedTier1Tag)">Create T1 Tag</ux-button>
         </div>
-        <div class="col s3 m3 l3">
-            <ux-dropdown [(model)]="selectedTier2Tag"
-                (modelChange)="onTagChanged(selectedTier2Tag);"
-                [label]="'Select Focus Area'" 
-                [options]="tier2Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
-                
-        </div>
-        <div class="col s3 m3 l3">
-            <ux-dropdown [(model)]="selectedTier3Tag"
-                (modelChange)="onTagChanged(selectedTier3Tag);"
-                [label]="'Select Technology'" 
-                [options]="tier3Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
-        </div>
-
-        <div class="col s3 m3 l3">
-            <ux-dropdown [(model)]="selectedTier4Tag"
-                (modelChange)="onTagChanged(selectedTier4Tag);"
-                [label]="'Select Category'" 
-                [options]="tier4Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
-        </div>
-      
-    </div>-->
-
     <div class="row">
         <div class="col s3 m3 l3">
             <ux-text [(text)]="selectedTier1Tag.name" (textChange)="onTagChanged(selectedTier1Tag);" [label]="'Tag Name'"></ux-text>
@@ -50,32 +31,7 @@
             <ux-button (click)="createTag(selectedTier4Tag)">Create T4 Tag</ux-button>
         </div>
     </div>
-    <div class="row">
-        <label> Checkpoints </label>
-        <ux-text [(text)]="checkpoint.name" [label]="'Checkpoint Name'"></ux-text>
-         <ux-text [(text)]="checkpoint.tutorialUrl" [label]="'Tutorial URL'"></ux-text>
-        <ux-button (click)="createCheckpoint();" [icon]="'person'">Create New Checkpoint</ux-button>
-        <ux-button (click)="getCheckpoints();" [icon]="'person'">Get Checkpoints</ux-button>
-    </div>
-
-    <div class="row">
-            <ux-card *ngFor="let check of checkpoints" 
-                [title]="check.name" 
-                [cardActionName]="'Open'"
-                [cardActionUrl]="check.tutorialUrl"
-                [iframeUrl]="check.tutorialUrl" 
-                [description]="check.description">
-            </ux-card>
-    </div>
-    <!--<div class="row">
-        <ux-text [(text)]="tier" [label]="'Tier'"></ux-text>
-        <ux-text [(text)]="tagName" [label]="'Tag Name'"></ux-text>
-        <ux-button (click)="createTagAtTier(tier, tagName);" [icon]="'person'">Create Tier</ux-button>
-    </div>
-    <ux-text [(text)]="checkpoint.title" [label]="'Checkpoint Title'"></ux-text>
-    <ux-text [(text)]="checkpoint.tutorialUrl" [label]="'Tutorial URL'"></ux-text>
-    <ux-textarea [label]="'Description'" [(text)]="test"></ux-textarea>
-    <ux-button (click)="createCheckpoint();" [icon]="'send'">Create Checkpoint</ux-button>-->
+   
 
 
 </ux-container>

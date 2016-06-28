@@ -1,16 +1,17 @@
 <ux-container>
     <sp-tag-select-control (selectedTagsChanged)="getCheckpoints($event);"></sp-tag-select-control>
    
-</ux-container>   
+
 <div class="row">
         <ux-card *ngFor="let check of checkpoints" 
             [title]="check.name" 
             [cardActionName]="'Open'"
             [cardActionUrl]="check.tutorialUrl"
-            [imageUrl]="check.tutorialUrl" 
+            [imageUrl]="'http://materializecss.com/images/sample-1.jpg'"
             [description]="check.description">
         </ux-card>
 </div>
+</ux-container>  
 
 
 

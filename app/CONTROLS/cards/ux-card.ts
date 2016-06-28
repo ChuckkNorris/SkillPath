@@ -8,6 +8,7 @@ import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
             display: inline-block;
             cursor: pointer;
             width: 300px;
+            height:325px;
         }
         .dimmed {
             position: relative;
@@ -39,7 +40,7 @@ import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
         <div class="card">
             <div class="card-image">
                 <iframe *ngIf="iframeUrl" class="dimmed" [src]="iframeUrl" ></iframe>
-                <img class="dimmed" *ngIf="imageUrl" class="dimmed" [src]="imageUrl"></iframe>
+                <img *ngIf="imageUrl" class="dimmed" [src]="imageUrl"/>
             </div>
            
             <div class="card-content" (mouseenter)="onMouseEnterDescription();" (mouseleave)="onMouseLeaveDescription();" >

@@ -1,8 +1,15 @@
 body {
-    color: #FFFFFF; 
-    display: flex;
+    color: black;
     min-height: 100vh;
     flex-direction: column;
+}
+option {
+  color: white;
+}
+
+.header {
+  font-weight: 300;
+  color: #00897b;
 }
 
 main {
