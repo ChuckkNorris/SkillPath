@@ -14,6 +14,8 @@ import {Observable} from 'rxjs/rx';
 })
 export class SpTagSelectControl {
     selectedTags: TagModel[] = [];
+
+    @Input() vertical: boolean = false;
     @Output() selectedTagsChanged: EventEmitter<TagModel[]> = new EventEmitter<TagModel[]>();
     constructor(private tagService: TagService, private checkpointService: CheckpointService) {
        // this.getTiers();
@@ -35,11 +37,11 @@ export class SpTagSelectControl {
     // - Tags - //
     getFirstTierTags() {
         this.tagService.getTagsAtTier(1).subscribe(tier1Tags => {
-            let nextTierTagModels: TagModel[] = [];
+            let firstTierTagModels: TagModel[] = [];
             tier1Tags.forEach(x => {
-                nextTierTagModels.push(x);
+                firstTierTagModels.push(x);
             })
-            this.tier1Tags = nextTierTagModels
+            this.tier1Tags = firstTierTagModels
         });
     }
 
@@ -62,10 +64,18 @@ export class SpTagSelectControl {
 
      onTagChanged(changedTag: TagModel){
          this.getNextTierTags(changedTag).subscribe(tags => {
-            switch (changedTag.tier) {
+            this.updateTags(changedTag.tier, tags);
+            let selectedTags = this.getSelectedTagsAsArray();
+            this.selectedTagsChanged.emit(selectedTags)
+        });
+
+    }
+
+    updateTags(changedTagTier:number, newTags?: TagModel[] ){
+         switch (changedTagTier) {
                 case 1:
                 
-                    this.tier2Tags = tags;
+                    this.tier2Tags = newTags;
                     this.selectedTier2Tag.key = undefined;
                     this.tier3Tags = [];
                     this.selectedTier3Tag.key = undefined;
@@ -74,14 +84,14 @@ export class SpTagSelectControl {
                     this.selectedTier4Tag.key = undefined;
                     break;
                 case 2:
-                    this.tier3Tags = tags;
+                    this.tier3Tags = newTags;
                     this.selectedTier3Tag.key = undefined;
                     this.selectedTier2Tag.parent = this.selectedTier1Tag; 
                     this.tier4Tags = [];
                     this.selectedTier4Tag.key = undefined;
                     break;
                 case 3:
-                    this.tier4Tags = tags;
+                    this.tier4Tags = newTags;
                     this.selectedTier4Tag.key = undefined;
                     this.selectedTier3Tag.parent = this.selectedTier2Tag; 
                     break;
@@ -91,10 +101,6 @@ export class SpTagSelectControl {
                 default:
                     break;
             }
-            let selectedTags = this.getSelectedTagsAsArray();
-            this.selectedTagsChanged.emit(selectedTags)
-        });
-
     }
 
      private getSelectedTagsAsArray(): TagModel[] {

@@ -1,13 +1,23 @@
 <div class="row">
-    <div class="col s3 m3 l3">
-        <ux-dropdown [(model)]="selectedTier1Tag"
-            (modelChange)="onTagChanged(selectedTier1Tag)"
-            [label]="'Path'"
-            [placeholder]="'Choose your Path'"
-            [options]="tier1Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
-            
+    <div [class.col.s3.m3.l3]="!vertical" [class.row]="vertical" >
+        <div [class.col.s6]="vertical">
+            <ux-dropdown 
+                
+                [(model)]="selectedTier1Tag"
+                (modelChange)="onTagChanged(selectedTier1Tag)"
+                [label]="'Path'"
+                [placeholder]="'Choose your Path'"
+                [options]="tier1Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
+        </div>
+        <div *ngIf="vertical" [class.col.s6]="vertical">
+            <ux-text [(text)]="newTier1Tag" 
+                (textChange)="onTagChanged(selectedTier1Tag);" 
+                [label]="'Tag Name'"></ux-text>
+            <ux-button (click)="createTag(selectedTier1Tag)">
+                Create T1 Tag</ux-button>
+        </div>
     </div>
-    <div [hidden]="!tier2Tags.length > 0" class="col s3 m3 l3">
+    <div [hidden]="!tier2Tags.length > 0" [class.col.s3.m3.l3]="!vertical" [class.row]="vertical">
         <ux-dropdown [(model)]="selectedTier2Tag"
             (modelChange)="onTagChanged(selectedTier2Tag);"
             [label]="'Focus'" 
@@ -15,7 +25,7 @@
             [options]="tier2Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
             
     </div>
-    <div [hidden]="!tier3Tags.length > 0" class="col s3 m3 l3">
+    <div [hidden]="!tier3Tags.length > 0" [class.col.s3.m3.l3]="!vertical" [class.row]="vertical">
         <ux-dropdown [(model)]="selectedTier3Tag"
             (modelChange)="onTagChanged(selectedTier3Tag);"
             [label]="'Technology'" 
@@ -23,7 +33,7 @@
             [options]="tier3Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
     </div>
 
-    <div [hidden]="!tier4Tags.length > 0" class="col s3 m3 l3">
+    <div [hidden]="!tier4Tags.length > 0" [class.col.s3.m3.l3]="!vertical" [class.row]="vertical">
         <ux-dropdown [(model)]="selectedTier4Tag"
             (modelChange)="onTagChanged(selectedTier4Tag);"
             [label]="'Category'"
@@ -31,4 +41,22 @@
             [options]="tier4Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
     </div>
     
+</div>
+<div class="row">
+    <div  class="col s3 m3 l3">
+        <ux-text [(text)]="newTier1Tag" (textChange)="onTagChanged(selectedTier1Tag);" [label]="'Tag Name'"></ux-text>
+        <ux-button (click)="createTag(selectedTier1Tag)">Create T1 Tag</ux-button>
+    </div>
+    <div [hidden]="!newTier1Tag" class="col s3 m3 l3">
+        <ux-text [(text)]="newTier2Tag" (textChange)="onTagChanged(selectedTier2Tag);" [label]="'Tag Name'"></ux-text>
+        <ux-button (click)="createTag(selectedTier2Tag)">Create T2 Tag</ux-button>
+    </div>
+        <div [hidden]="!newTier2Tag" class="col s3 m3 l3">
+        <ux-text [(text)]="newTier3Tag" (textChange)="onTagChanged(selectedTier3Tag);" [label]="'Tag Name'"></ux-text>
+        <ux-button (click)="createTag(selectedTier3Tag)">Create T3 Tag</ux-button>
+    </div>
+        <div [hidden]="!newTier3Tag" class="col s3 m3 l3">
+        <ux-text [(text)]="newTier4Tag" (textChange)="onTagChanged(selectedTier4Tag);" [label]="'Tag Name'"></ux-text>
+        <ux-button (click)="createTag(selectedTier4Tag)">Create T4 Tag</ux-button>
+    </div>
 </div>
