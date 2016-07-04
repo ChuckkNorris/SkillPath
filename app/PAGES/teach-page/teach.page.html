@@ -1,15 +1,20 @@
 <ux-container>
     <h2 class="header">Create New Checkpoint</h2>
      <div class="row">
-        <label> Checkpoints </label>
-        <ux-text [(text)]="checkpoint.name" [label]="'Checkpoint Name'"></ux-text>
-         <ux-text [(text)]="checkpoint.tutorialUrl" [label]="'Tutorial URL'"></ux-text>
-        <ux-button (click)="createCheckpoint();" [icon]="'person'">Create New Checkpoint</ux-button>
+        <ux-text class="col s6" [(text)]="checkpoint.name" [label]="'Checkpoint Name'"></ux-text>
+        <ux-text class="col s6" [(text)]="checkpoint.tutorialUrl" [label]="'Tutorial URL'"></ux-text>
+    </div>
+    <div class="row">
+         <sp-tag-select-control [vertical]="true" (selectedTagsChanged)="tagsChanged($event);"></sp-tag-select-control>
+       
+    </div>
+    <div *ngIf="selectedTags.length == 4" class="row">
+         <ux-button (click)="createCheckpoint();" [icon]="'person'">Create New Checkpoint</ux-button>
         <ux-button (click)="getCheckpoints();" [icon]="'person'">Get Checkpoints</ux-button>
     </div>
-    <sp-tag-select-control [vertical]="true" (selectedTagsChanged)="tagsChanged($event);"></sp-tag-select-control>
+    
 
-    <div class="row">
+    <!--<div class="row">
         <div class="col s3 m3 l3">
             <ux-text [(text)]="selectedTier1Tag.name" (textChange)="onTagChanged(selectedTier1Tag);" [label]="'Tag Name'"></ux-text>
             <ux-button (click)="createTag(selectedTier1Tag)">Create T1 Tag</ux-button>
@@ -26,8 +31,21 @@
             <ux-text [(text)]="selectedTier4Tag.name" (textChange)="onTagChanged(selectedTier4Tag);" [label]="'Tag Name'"></ux-text>
             <ux-button (click)="createTag(selectedTier4Tag)">Create T4 Tag</ux-button>
         </div>
-    </div>
+    </div>-->
    
+   <!-- Modal Trigger -->
+  <a class="waves-effect waves-light btn modal-trigger" (click)="showTagModal();">Modal</a>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a (click)="closeTagModal();" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
 
 
 </ux-container>

@@ -35,6 +35,7 @@ export class TeachPage {
 
     checkpoints: CheckpointModel[] = [];
     tagsChanged(selectedTags) {
+        this.selectedTags = selectedTags;
         console.log(selectedTags);
     }
     // - Checkpoints - // 
@@ -54,6 +55,14 @@ export class TeachPage {
             console.log(this.checkpoints)
             //console.log(this.checkpoints);
         });
+    }
+    isTagModalVisible = true;
+    showTagModal() {
+        $('#modal1').openModal();
+    }
+
+    closeTagModal() {
+        $('#modal1').closeModal();
     }
    
     // - Tags - //

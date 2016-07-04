@@ -7,7 +7,7 @@ import {NameValuePair} from '../../MODELS/name-value-pair.model';
     directives: [MaterializeDirective],
    // changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-    <div class="input-field">
+    <div >
       <select 
         [ngModel]="model" 
         (ngModelChange)="onChange($event);" 

@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // Enable Mobile Menu
     $(".button-collapse").sideNav();
-    //$('select').material_select();
+    
   }
   
 
