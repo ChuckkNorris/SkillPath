@@ -1,5 +1,3 @@
-export { BaseModel } from './MODELS/base.model';
-export { CheckpointModel } from './MODELS/checkpoint.model';
 export { AppComponent } from './app.component';
 export { ComponentTemplate } from './COMPONENT-TEMPLATE/component';
 export { UxButton } from './CONTROLS/buttons/ux-button';
@@ -10,9 +8,10 @@ export { UxSearch } from './CONTROLS/forms/ux-search';
 export { UxText } from './CONTROLS/forms/ux-text';
 export { UxTextArea } from './CONTROLS/forms/ux-textarea';
 export { SpCheckpointThumbnail } from './CONTROLS/skill-path/sp-checkpoint-thumbnail';
+export { SpNewTagModal } from './CONTROLS/skill-path/sp-new-tag-modal';
 export { SpTagSelectControl } from './CONTROLS/skill-path/sp-tag-select.control';
-
-
+export { BaseModel } from './MODELS/base.model';
+export { CheckpointModel } from './MODELS/checkpoint.model';
 export { NameValuePair } from './MODELS/name-value-pair.model';
 export { Platform } from './MODELS/platform.model';
 export { TagModel } from './MODELS/tag.model';

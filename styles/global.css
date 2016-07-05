@@ -38,3 +38,14 @@ main {
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 }
+
+#toast-container {
+    right: 5% !important;
+    top: 7% !important;
+    bottom: auto !important;
+    left: auto !important;
+}
+
+.toast {
+  background-color: darkred !important;
+}

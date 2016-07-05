@@ -9,19 +9,24 @@ export class TagService {
 
    
 
-    public createTag(tag: TagModel) {
-        let tagPath = 'tags/' + tag.tier + '/' + tag.key;
-        this.fireService.exists(tagPath).subscribe(tagExists => {
-            if (!tagExists) {
-                let tagToSave = tag.toFirebaseObject();
-                this.fireService.set(tagPath, tagToSave).subscribe(() => {
-                    this.setAllParents(tagPath, tag);
-                });
-            }
-            else {
-              this.setAllParents(tagPath, tag);
-            }
-        });
+    public createTag(tag: TagModel) : Observable<string> {
+        return Observable.create(observer => {
+            let tagPath = 'tags/' + tag.tier + '/' + tag.key;
+            this.fireService.exists(tagPath).subscribe(tagExists => {
+                if (!tagExists) {
+                    let tagToSave = tag.toFirebaseObject();
+                    this.fireService.set(tagPath, tagToSave).subscribe(() => {
+                        this.setAllParents(tagPath, tag);
+                        observer.next(null);
+                    });
+                }
+                else {
+                    observer.next('That tag already exists');
+                    //this.setAllParents(tagPath, tag);
+                }
+            });
+        })
+       
     }
 
     private setAllParents(tagKeyPath: string, childTag: TagModel) {

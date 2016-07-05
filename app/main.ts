@@ -3,7 +3,7 @@ import { PLATFORM_DIRECTIVES, provide } from '@angular/core';
 import { ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import {UxButton, UxText, UxDropdown, UxContainer, UxCard, UxTextArea, SpCheckpointThumbnail, SpTagSelectControl} from './export';
+import {UxButton, UxText, UxDropdown, UxContainer, UxCard, UxTextArea, SpCheckpointThumbnail, SpTagSelectControl, SpNewTagModal} from './export';
 import { FireService} from './SERVICES/fire.service';
 
 
@@ -20,4 +20,5 @@ bootstrap(AppComponent, [
     provide(PLATFORM_DIRECTIVES, {useValue: UxTextArea, multi: true}),
     provide(PLATFORM_DIRECTIVES, {useValue: SpCheckpointThumbnail, multi: true}),
     provide(PLATFORM_DIRECTIVES, {useValue: SpTagSelectControl, multi: true}),
+    provide(PLATFORM_DIRECTIVES, {useValue: SpNewTagModal, multi: true})
 ]);
