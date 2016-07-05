@@ -10,7 +10,7 @@
             [options]="tier1Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
         <sp-new-tag-modal [id]="'tag1Modal'" [model]="selectedTier1Tag"></sp-new-tag-modal>
     </div>
-    <div [hidden]="!tier2Tags.length > 0" [class.col.s3.m3.l3]="!vertical" [class.row]="vertical">
+    <div [hidden]="!selectedTier2Tag.parent" [class.col.s3.m3.l3]="!vertical" [class.row]="vertical">
         <ux-dropdown [(model)]="selectedTier2Tag"
             class="col s5"
             (modelChange)="onTagChanged(selectedTier2Tag);"
@@ -20,24 +20,24 @@
         <sp-new-tag-modal [id]="'tag2Modal'" [model]="selectedTier2Tag"></sp-new-tag-modal>
         {{selectedTier2Tag | json}}
     </div>
-    <div [hidden]="!tier3Tags.length > 0" [class.col.s3.m3.l3]="!vertical" [class.row]="vertical">
+    <div [hidden]="!selectedTier3Tag.parent" [class.col.s3.m3.l3]="!vertical" [class.row]="vertical">
         <ux-dropdown [(model)]="selectedTier3Tag"
             class="col s5"
             (modelChange)="onTagChanged(selectedTier3Tag);"
             [label]="'Technology'" 
             [placeholder]="'Choose your Technology'"
             [options]="tier3Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
-        <sp-new-tag-modal [(model)]="selectedTier3Tag"></sp-new-tag-modal>
+        <sp-new-tag-modal [id]="'tag3Modal'" [(model)]="selectedTier3Tag"></sp-new-tag-modal>
     </div>
 
-    <div [hidden]="!tier4Tags.length > 0" [class.col.s3.m3.l3]="!vertical" [class.row]="vertical">
+    <div [hidden]="!selectedTier4Tag.parent" [class.col.s3.m3.l3]="!vertical" [class.row]="vertical">
         <ux-dropdown [(model)]="selectedTier4Tag"
             class="col s5"
             (modelChange)="onTagChanged(selectedTier4Tag);"
             [label]="'Category'"
             [placeholder]="'Select a Category'"
             [options]="tier4Tags" [nameProperty]="'name'" [valueProperty]="'key'"></ux-dropdown>
-        <sp-new-tag-modal [(model)]="selectedTier4Tag"></sp-new-tag-modal>
+        <sp-new-tag-modal [id]="'tag4Modal'" [(model)]="selectedTier4Tag"></sp-new-tag-modal>
     </div>
     
 </div>

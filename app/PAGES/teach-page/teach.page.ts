@@ -98,6 +98,7 @@ export class TeachPage {
             switch (changedTag.tier) {
                 case 1:
                     this.tier2Tags = tags;
+                    this.selectedTier2Tag.parent = this.selectedTier1Tag; 
                     this.tier3Tags = [];
                     this.tier4Tags = [];
                     break;

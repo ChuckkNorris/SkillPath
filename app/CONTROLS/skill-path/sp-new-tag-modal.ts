@@ -37,14 +37,14 @@ export class SpNewTagModal implements OnInit {
   //  @ViewChild('myModal') id;
     createTag(tag: TagModel) {
         console.log(this.model);
-        // this.tagService.createTag(tag).subscribe(error => {
-        //     if (error)
-        //         Materialize.toast(error, 5000);
-        //     else {
-        //         Materialize.toast('Tag Created Successfully!', 5000);
-        //         this.closeTagModal();
-        //     }
-        // })
+        this.tagService.createTag(tag).subscribe(error => {
+            if (error)
+                Materialize.toast(error, 5000);
+            else {
+                Materialize.toast('Tag Created Successfully!', 5000);
+                this.closeTagModal();
+            }
+        })
        
     }
 

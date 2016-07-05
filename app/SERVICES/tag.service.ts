@@ -21,8 +21,9 @@ export class TagService {
                     });
                 }
                 else {
-                    observer.next('That tag already exists');
-                    //this.setAllParents(tagPath, tag);
+                    this.setAllParents(tagPath, tag);
+                  //  observer.next('That tag already exists');
+                    observer.next(null);
                 }
             });
         })
@@ -30,6 +31,7 @@ export class TagService {
     }
 
     private setAllParents(tagKeyPath: string, childTag: TagModel) {
+        // TODO: Check if each parent exists to show error message
         if (childTag.parent){ 
             this.setParentTag(tagKeyPath, childTag.parent);
             if (childTag.parent.parent){ 

@@ -72,36 +72,34 @@ export class SpTagSelectControl {
     }
 
     updateTags(changedTagTier:number, newTags?: TagModel[] ){
+        // TODO: Set parents to null after selection instead of tags;
          switch (changedTagTier) {
                 case 1:
-                
-                    this.tier2Tags = newTags;
+                    this.selectedTier2Tag.parent = this.selectedTier1Tag;
                     this.selectedTier2Tag.key = undefined;
-                    this.tier3Tags = [];
                     this.selectedTier3Tag.key = undefined;
-
-                    this.tier4Tags = [];
                     this.selectedTier4Tag.key = undefined;
+                    this.tier2Tags = newTags;
+                    this.tier3Tags = [];
+                    this.tier4Tags = [];
                     break;
                 case 2:
-                    this.tier3Tags = newTags;
+                    this.selectedTier3Tag.parent = this.selectedTier2Tag; 
                     this.selectedTier3Tag.key = undefined;
-                    this.selectedTier2Tag.parent = this.selectedTier1Tag; 
-                    this.tier4Tags = [];
                     this.selectedTier4Tag.key = undefined;
+                    this.tier3Tags = newTags;
+                    this.tier4Tags = [];
                     break;
                 case 3:
-                    this.tier4Tags = newTags;
-                    this.selectedTier4Tag.key = undefined;
-                    this.selectedTier3Tag.parent = this.selectedTier2Tag; 
-                    break;
-                case 4:
                     this.selectedTier4Tag.parent = this.selectedTier3Tag; 
+                    this.selectedTier4Tag.key = undefined;
+                    this.tier4Tags = newTags;
                     break;
                 default:
                     break;
-            }
+        }
     }
+
 
      private getSelectedTagsAsArray(): TagModel[] {
         let tags: TagModel[] = [
