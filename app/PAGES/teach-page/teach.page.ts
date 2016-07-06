@@ -35,6 +35,7 @@ export class TeachPage {
 
     checkpoints: CheckpointModel[] = [];
     tagsChanged(selectedTags) {
+        console.log(selectedTags[0].name);
         this.selectedTags = selectedTags;
         console.log(selectedTags);
     }
@@ -47,7 +48,7 @@ export class TeachPage {
     getCheckpoints() {
         let tags = this.getSelectedTagsAsArray();
         this.checkpointService.getCheckpointsByTags(tags).subscribe(checkpoints => {
-            // TODO: Change to use Child Added so you don't have to clear the collection each time
+            // TODO: Change to use Child Added so you don't clear the entire collection each time
             this.checkpoints = [];
             checkpoints.forEach(checkpoint => {
                 this.checkpoints.push(checkpoint);
@@ -128,16 +129,25 @@ export class TeachPage {
     }
 
      private getSelectedTagsAsArray(): TagModel[] {
+         console.log(this.selectedTier1Tag);
         let tags: TagModel[] = [
             this.selectedTier1Tag,
             this.selectedTier2Tag,
             this.selectedTier3Tag,
             this.selectedTier4Tag
         ];
-        let selectedTags = tags.filter(x => {
-            if(x.key) return true;
-        })
-        return selectedTags;
+        
+        // let selectedTags = tags.filter(x => {
+        //     if(x.key) return true;
+        // })
+        return tags;
+    }
+
+    private fillTag(tagModel: TagModel): TagModel {
+        console.log(tagModel.key);
+        tagModel.key = tagModel.key.toString();
+        tagModel.name = tagModel.name.toString();
+        return  tagModel;
     }
 
 }

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
 import { TagModel } from '../../export';
 import {TagService} from '../../SERVICES/tag.service';
+//import {Materialize} from 'Materialize';
 
 
 @Component({

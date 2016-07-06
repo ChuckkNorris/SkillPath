@@ -1,4 +1,4 @@
-<div>
-    <h1>Page Here</h1>
-    <iframe src="http://victorsavkin.com/post/137821436516/managing-state-in-angular-2-applications"></iframe>
+<div *ngIf="checkpoint">
+    <h1 >{{checkpoint.name}}</h1>
+    <iframe [src]="checkpoint.tutorialUrl"></iframe>
 </div>

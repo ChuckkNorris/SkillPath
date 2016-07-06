@@ -13,7 +13,7 @@ import { LearnPage, TeachPage, CheckpointPage } from './export';
 @Routes([
   { path: '/', component: LearnPage },
   { path: 'Teach', component:  TeachPage},
-  { path: 'checkpoint/:id', component:  CheckpointPage}
+  { path: 'checkpoint/:key', component:  CheckpointPage}
 ])
 export class AppComponent implements OnInit {
   

@@ -5,5 +5,8 @@
     "jasmine": "registry:dt/jasmine#2.2.0+20160505161446",
     "jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#ca92a5b250433c38230b5f4138b36453862342bf",
     "node": "registry:dt/node#4.0.0+20160509154515"
+  },
+  "dependencies": {
+    "debug": "registry:npm/debug#2.0.0+20160511151334"
   }
 }

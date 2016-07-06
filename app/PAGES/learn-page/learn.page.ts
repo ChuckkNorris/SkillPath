@@ -98,8 +98,8 @@ export class LearnPage implements OnInit {
         
     }
 
-    navigateToCheckpoint(){
-        this.router.navigate(['/checkpoint/3']);
+    navigateToCheckpoint(checkpointToNavigateTo: CheckpointModel){
+        this.router.navigate(['/checkpoint/' + checkpointToNavigateTo.key]);
     }
 
     private checkpoints: CheckpointModel[] = [];

@@ -12,7 +12,7 @@
     'rxjs':                       'node_modules/rxjs',
     'firebase':                   'node_modules/firebase',
     "materialize-css": "node-modules/materialize-css",
-    "materialize": "node_modules/angular2-materialize",
+     "materialize": "node_modules/angular2-materialize",
     "angular2-materialize": "node_modules/angular2-materialize",
     "querybase":          'node_modules/querybase/dist'
   };

@@ -1,21 +1,30 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { OnActivate, RouteSegment } from '@angular/router';
 import { CheckpointModel } from '../../export';
+import { CheckpointService } from '../../SERVICES/Checkpoint.service';
+
 @Component({
     moduleId: 'app/PAGES/checkpoint-page/',
     selector: 'checkpoint-page',
     templateUrl: 'checkpoint-page.html',
-    styleUrls: ['checkpoint-page.css']
+    styleUrls: ['checkpoint-page.css'],
+    providers: [CheckpointService]
 })
 export class CheckpointPage implements OnInit, OnActivate {
-    private id: number;
     
+    constructor(private checkpointService: CheckpointService) {}
+    private key: string;
+    checkpoint: CheckpointModel;
     routerOnActivate(currentSegment: RouteSegment) {
-        this.id = +currentSegment.getParam('id');
+        this.key = currentSegment.getParam('key');
+        
     }
     
     ngOnInit(){
-        console.log(this.id);
+        this.checkpointService.getCheckpoint(this.key).subscribe(checkpoint => {
+            console.log(checkpoint);
+            this.checkpoint = checkpoint;
+        })
     }
     
    

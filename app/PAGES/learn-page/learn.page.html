@@ -4,6 +4,7 @@
 
 <div class="row">
         <ux-card *ngFor="let check of checkpoints" 
+            (click)="navigateToCheckpoint(check)"
             [title]="check.name" 
             [cardActionName]="'Open'"
             [cardActionUrl]="check.tutorialUrl"
