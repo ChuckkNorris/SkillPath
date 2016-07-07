@@ -41,22 +41,9 @@ export class TeachPage {
     }
     // - Checkpoints - // 
     createCheckpoint(){
-        let tags = this.getSelectedTagsAsArray();
-        this.checkpointService.createCheckpoint(tags, this.checkpoint);
+        this.checkpointService.createCheckpoint(this.selectedTags, this.checkpoint);
     }
 
-    getCheckpoints() {
-        let tags = this.getSelectedTagsAsArray();
-        this.checkpointService.getCheckpointsByTags(tags).subscribe(checkpoints => {
-            // TODO: Change to use Child Added so you don't clear the entire collection each time
-            this.checkpoints = [];
-            checkpoints.forEach(checkpoint => {
-                this.checkpoints.push(checkpoint);
-            });
-            console.log(this.checkpoints)
-            //console.log(this.checkpoints);
-        });
-    }
     isTagModalVisible = true;
     showTagModal() {
         $('#modal1').openModal();
@@ -95,30 +82,33 @@ export class TeachPage {
     }
 
      onTagChanged(changedTag: TagModel){
+         console.log(changedTag.key);
          this.getNextTierTags(changedTag).subscribe(tags => {
             switch (changedTag.tier) {
                 case 1:
+                    this.selectedTier1Tag = changedTag;
                     this.tier2Tags = tags;
-                    this.selectedTier2Tag.parent = this.selectedTier1Tag; 
                     this.tier3Tags = [];
                     this.tier4Tags = [];
                     break;
                 case 2:
+                    this.selectedTier2Tag = changedTag;
                     this.tier3Tags = tags;
                     this.selectedTier2Tag.parent = this.selectedTier1Tag; 
                     this.tier4Tags = [];
                     break;
                 case 3:
+                    this.selectedTier3Tag = changedTag;
                     this.tier4Tags = tags;
                     this.selectedTier3Tag.parent = this.selectedTier2Tag; 
                     break;
                 case 4:
+                    this.selectedTier4Tag = changedTag;
                     this.selectedTier4Tag.parent = this.selectedTier3Tag; 
                     break;
                 default:
                     break;
             }
-            this.getCheckpoints();
         });
 
     }
@@ -129,7 +119,7 @@ export class TeachPage {
     }
 
      private getSelectedTagsAsArray(): TagModel[] {
-         console.log(this.selectedTier1Tag);
+         console.log(this.selectedTier1Tag.key);
         let tags: TagModel[] = [
             this.selectedTier1Tag,
             this.selectedTier2Tag,

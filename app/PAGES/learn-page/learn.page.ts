@@ -77,12 +77,8 @@ export class LearnPage implements OnInit {
 //     }
 
     getAllCheckpoints() {
-        this.checkpointService.getAllCheckpoints().subscribe(what => {
-            
-            var array = $.map(what, function(value, index) {
-                return [value];
-            });
-            this.checkpoints = array as CheckpointModel[];
+        this.checkpointService.getAllCheckpoints().subscribe(checkpoints => {
+            this.checkpoints = checkpoints;
         });
     }
     getIt(name: string) {
