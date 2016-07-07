@@ -9,7 +9,7 @@
          <sp-tag-select-control [vertical]="true" (selectedTagsChanged)="tagsChanged($event);"></sp-tag-select-control>
        
     </div>
-    <div *ngIf="selectedTags.length == 4" class="row">
+    <div *ngIf="selectedTags.length == 4" class="row center">
          <ux-button (click)="createCheckpoint();" [icon]="'done'">Create Tutorial</ux-button>
     </div>
 

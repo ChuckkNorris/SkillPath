@@ -13632,7 +13632,7 @@ $__System.registerDynamic("12", ["4", "13"], true, function($__require, exports,
     UxDropdown = __decorate([core_1.Component({
       selector: 'ux-dropdown',
       directives: [angular2_materialize_1.MaterializeDirective],
-      template: "\n    <div >\n      <select \n        [ngModel]=\"model\" \n        (ngModelChange)=\"onChange($event);\" \n        materialize=\"material_select\" \n        [materializeSelectOptions]=\"boundCollection\">\n        <option *ngIf=\"placeholder\" disabled>{{placeholder}}</option>\n        <option  *ngFor=\"let option of boundCollection\" [ngValue]=\"option.value\">{{option.name}}</option>\n      </select>\n      <label>{{label}}</label>\n    </div>\n    "
+      template: "\n    <div>\n      <select \n        [ngModel]=\"model\" \n        (ngModelChange)=\"onChange($event);\" \n        materialize=\"material_select\" \n        [materializeSelectOptions]=\"boundCollection\">\n        <option *ngIf=\"placeholder\" disabled>{{placeholder}}</option>\n        <option  *ngFor=\"let option of boundCollection\" [ngValue]=\"option.value\">{{option.name}}</option>\n      </select>\n      <label>{{label}}</label>\n    </div>\n    "
     }), __metadata('design:paramtypes', [])], UxDropdown);
     return UxDropdown;
   }());
@@ -13825,7 +13825,7 @@ $__System.registerDynamic("17", ["4", "d", "18"], true, function($__require, exp
     __decorate([core_1.Input(), __metadata('design:type', String)], SpNewTagModal.prototype, "id", void 0);
     SpNewTagModal = __decorate([core_1.Component({
       selector: 'sp-new-tag-modal',
-      template: "\n  <!-- Modal Trigger -->\n  <a class=\"waves-effect waves-light btn modal-trigger\" (click)=\"showTagModal();\">Add New Tag</a>\n\n  <!-- Modal Structure -->\n  <div id=\"{{id}}\" class=\"modal\">\n    <div class=\"modal-content\">\n      <h4>Create New Tier {{model.tier}} Tag</h4>\n      <ux-text [(text)]=\"model.name\"></ux-text>\n      {{model | json}}\n    </div>\n    <div class=\"modal-footer\">\n        <a (click)=\"createTag(model);\" class=\" modal-action waves-effect waves-green btn-flat\">Save</a>\n        <a (click)=\"closeTagModal();\" class=\" modal-action modal-close waves-effect waves-green btn-flat\">Cancel</a>\n    </div>\n  </div>\n    "
+      template: "\n  <!-- Modal Trigger -->\n  <a class=\"waves-effect waves-light btn modal-trigger\" (click)=\"showTagModal();\">+ Tag</a>\n\n  <!-- Modal Structure -->\n  <div id=\"{{id}}\" class=\"modal\">\n    <div class=\"modal-content\">\n      <h4>Create New Tier {{model.tier}} Tag</h4>\n      <ux-text [(text)]=\"model.name\"></ux-text>\n      {{model | json}}\n    </div>\n    <div class=\"modal-footer\">\n        <a (click)=\"createTag(model);\" class=\" modal-action waves-effect waves-green btn-flat\">Save</a>\n        <a (click)=\"closeTagModal();\" class=\" modal-action modal-close waves-effect waves-green btn-flat\">Cancel</a>\n    </div>\n  </div>\n    "
     }), __metadata('design:paramtypes', [tag_service_1.TagService])], SpNewTagModal);
     return SpNewTagModal;
   }());
@@ -13922,23 +13922,37 @@ $__System.registerDynamic("19", ["4", "1a", "d", "18", "1b", "1c"], true, functi
       switch (changedTagTier) {
         case 1:
           this.selectedTier2Tag.parent = this.selectedTier1Tag;
+          this.selectedTier2Tag.key = undefined;
+          this.selectedTier3Tag.key = undefined;
+          this.selectedTier4Tag.key = undefined;
           this.tier2Tags = newTags;
           this.tier3Tags = [];
           this.tier4Tags = [];
           break;
         case 2:
           this.selectedTier3Tag.parent = this.selectedTier2Tag;
+          this.selectedTier3Tag.key = undefined;
+          this.selectedTier4Tag.key = undefined;
           this.tier3Tags = newTags;
           this.tier4Tags = [];
           break;
         case 3:
           this.selectedTier4Tag.parent = this.selectedTier3Tag;
+          this.selectedTier4Tag.key = undefined;
           this.tier4Tags = newTags;
           break;
         case 4:
         default:
           break;
       }
+    };
+    SpTagSelectControl.prototype.getDropdownClasses = function() {
+      if (this.vertical)
+        return ['col', 's5', 'offset-s1'];
+    };
+    SpTagSelectControl.prototype.getAddTagClasses = function() {
+      if (this.vertical)
+        return ['col', 's4'];
     };
     SpTagSelectControl.prototype.getSelectedTagsAsArray = function() {
       var tags = [this.selectedTier1Tag, this.selectedTier2Tag, this.selectedTier3Tag, this.selectedTier4Tag];
@@ -13962,7 +13976,37 @@ $__System.registerDynamic("19", ["4", "1a", "d", "18", "1b", "1c"], true, functi
   return module.exports;
 });
 
-$__System.registerDynamic("1d", ["d"], true, function($__require, exports, module) {
+$__System.registerDynamic("1d", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var BaseModel = (function() {
+    function BaseModel() {}
+    Object.defineProperty(BaseModel.prototype, "key", {
+      get: function() {
+        return this._key;
+      },
+      set: function(v) {
+        if (v)
+          this._key = BaseModel.formatAsKey(v);
+        else
+          this._key = v;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    BaseModel.formatAsKey = function(unformattedKey) {
+      return unformattedKey.trim().toLowerCase().replace(' ', '-').replace('/', '-');
+    };
+    return BaseModel;
+  }());
+  exports.BaseModel = BaseModel;
+  return module.exports;
+});
+
+$__System.registerDynamic("1e", ["d"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -14033,7 +14077,7 @@ $__System.registerDynamic("1d", ["d"], true, function($__require, exports, modul
   return module.exports;
 });
 
-$__System.registerDynamic("1e", ["d"], true, function($__require, exports, module) {
+$__System.registerDynamic("1f", ["d"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -14060,7 +14104,7 @@ $__System.registerDynamic("1e", ["d"], true, function($__require, exports, modul
   return module.exports;
 });
 
-$__System.registerDynamic("1f", ["4", "1b", "20", "1c"], true, function($__require, exports, module) {
+$__System.registerDynamic("20", ["4", "1b", "21", "1c"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -14084,7 +14128,7 @@ $__System.registerDynamic("1f", ["4", "1b", "20", "1c"], true, function($__requi
   };
   var core_1 = $__require('4');
   var fire_service_1 = $__require('1b');
-  var checkpoint_model_1 = $__require('20');
+  var checkpoint_model_1 = $__require('21');
   var rx_1 = $__require('1c');
   var CheckpointService = (function() {
     function CheckpointService(fireService) {
@@ -14184,7 +14228,7 @@ $__System.registerDynamic("1f", ["4", "1b", "20", "1c"], true, function($__requi
   return module.exports;
 });
 
-$__System.registerDynamic("21", ["4", "1f"], true, function($__require, exports, module) {
+$__System.registerDynamic("22", ["4", "20"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -14207,7 +14251,7 @@ $__System.registerDynamic("21", ["4", "1f"], true, function($__require, exports,
       return Reflect.metadata(k, v);
   };
   var core_1 = $__require('4');
-  var Checkpoint_service_1 = $__require('1f');
+  var Checkpoint_service_1 = $__require('20');
   var CheckpointPage = (function() {
     function CheckpointPage(checkpointService) {
       this.checkpointService = checkpointService;
@@ -14247,7 +14291,7 @@ var __extends = (this && this.__extends) || function(d, b) {
   d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 (function(global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs/Subject'), require('rxjs/observable/PromiseObservable'), require('rxjs/operator/toPromise'), require('rxjs/Observable')) : typeof define === 'function' && define.amd ? define("22", ["exports", "4", "5", "6", "7", "8"], factory) : (factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}), global.ng.core, global.Rx, global.Rx, global.Rx.Observable.prototype, global.Rx));
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs/Subject'), require('rxjs/observable/PromiseObservable'), require('rxjs/operator/toPromise'), require('rxjs/Observable')) : typeof define === 'function' && define.amd ? define("23", ["exports", "4", "5", "6", "7", "8"], factory) : (factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}), global.ng.core, global.Rx, global.Rx, global.Rx.Observable.prototype, global.Rx));
 }(this, function(exports, _angular_core, rxjs_Subject, rxjs_observable_PromiseObservable, rxjs_operator_toPromise, rxjs_Observable) {
   'use strict';
   var globalScope;
@@ -18470,7 +18514,7 @@ var __extends = (this && this.__extends) || function(d, b) {
   d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 (function(global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common')) : typeof define === 'function' && define.amd ? define("a", ["exports", "4", "22"], factory) : (factory((global.ng = global.ng || {}, global.ng.platformBrowser = global.ng.platformBrowser || {}), global.ng.core, global.ng.common));
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common')) : typeof define === 'function' && define.amd ? define("a", ["exports", "4", "23"], factory) : (factory((global.ng = global.ng || {}, global.ng.platformBrowser = global.ng.platformBrowser || {}), global.ng.core, global.ng.common));
 }(this, function(exports, _angular_core, _angular_common) {
   'use strict';
   var globalScope;
@@ -21137,7 +21181,7 @@ var __extends = (this && this.__extends) || function(d, b) {
   d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 (function(global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs/Subject'), require('rxjs/observable/PromiseObservable'), require('rxjs/operator/toPromise'), require('rxjs/Observable'), require('@angular/common'), require('@angular/platform-browser')) : typeof define === 'function' && define.amd ? define("c", ["exports", "4", "5", "6", "7", "8", "22", "a"], factory) : (factory((global.ng = global.ng || {}, global.ng.router = global.ng.router || {}), global.ng.core, global.Rx, global.Rx, global.Rx.Observable.prototype, global.Rx, global.ng.common, global.ng.platformBrowser));
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs/Subject'), require('rxjs/observable/PromiseObservable'), require('rxjs/operator/toPromise'), require('rxjs/Observable'), require('@angular/common'), require('@angular/platform-browser')) : typeof define === 'function' && define.amd ? define("c", ["exports", "4", "5", "6", "7", "8", "23", "a"], factory) : (factory((global.ng = global.ng || {}, global.ng.router = global.ng.router || {}), global.ng.core, global.Rx, global.Rx, global.Rx.Observable.prototype, global.Rx, global.ng.common, global.ng.platformBrowser));
 }(this, function(exports, _angular_core, rxjs_Subject, rxjs_observable_PromiseObservable, rxjs_operator_toPromise, rxjs_Observable, _angular_common, _angular_platformBrowser) {
   'use strict';
   var globalScope;
@@ -22936,7 +22980,7 @@ $__System.registerDynamic("13", ["4"], true, function($__require, exports, modul
   return module.exports;
 });
 
-$__System.registerDynamic("23", ["4", "c", "1a", "13"], true, function($__require, exports, module) {
+$__System.registerDynamic("24", ["4", "c", "1a", "13"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -23088,7 +23132,7 @@ $__System.registerDynamic("2", ["4", "d"], true, function($__require, exports, m
   return module.exports;
 });
 
-$__System.registerDynamic("24", ["4", "1a", "d", "18", "1b", "1c", "2"], true, function($__require, exports, module) {
+$__System.registerDynamic("25", ["4", "1a", "d", "18", "1b", "1c", "2"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -23235,64 +23279,21 @@ $__System.registerDynamic("24", ["4", "1a", "d", "18", "1b", "1c", "2"], true, f
   return module.exports;
 });
 
-$__System.registerDynamic("25", [], true, function($__require, exports, module) {
+$__System.registerDynamic("21", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var BaseModel = (function() {
-    function BaseModel() {}
-    Object.defineProperty(BaseModel.prototype, "key", {
-      get: function() {
-        return this._key;
-      },
-      set: function(v) {
-        if (v)
-          this._key = BaseModel.formatAsKey(v);
-        else
-          this._key = v;
-      },
-      enumerable: true,
-      configurable: true
-    });
-    BaseModel.formatAsKey = function(unformattedKey) {
-      return unformattedKey.trim().toLowerCase().replace(' ', '-').replace('/', '-');
-    };
-    return BaseModel;
-  }());
-  exports.BaseModel = BaseModel;
-  return module.exports;
-});
-
-$__System.registerDynamic("20", ["25"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var base_model_1 = $__require('25');
-  var CheckpointModel = (function(_super) {
-    __extends(CheckpointModel, _super);
-    function CheckpointModel() {
-      _super.apply(this, arguments);
-    }
+  var CheckpointModel = (function() {
+    function CheckpointModel() {}
     return CheckpointModel;
-  }(base_model_1.BaseModel));
+  }());
   exports.CheckpointModel = CheckpointModel;
   return module.exports;
 });
 
-$__System.registerDynamic("1a", ["4", "1b", "20", "1c"], true, function($__require, exports, module) {
+$__System.registerDynamic("1a", ["4", "1b", "21", "1c"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -23316,7 +23317,7 @@ $__System.registerDynamic("1a", ["4", "1b", "20", "1c"], true, function($__requi
   };
   var core_1 = $__require('4');
   var fire_service_1 = $__require('1b');
-  var checkpoint_model_1 = $__require('20');
+  var checkpoint_model_1 = $__require('21');
   var rx_1 = $__require('1c');
   var CheckpointService = (function() {
     function CheckpointService(fireService) {
@@ -23842,7 +23843,7 @@ $__System.registerDynamic("28", ["4", "1b"], true, function($__require, exports,
   return module.exports;
 });
 
-$__System.registerDynamic("d", ["b", "e", "f", "10", "11", "12", "14", "15", "16", "2", "17", "19", "25", "20", "1d", "1e", "21", "23", "24", "1a", "1b", "26", "27", "18", "28"], true, function($__require, exports, module) {
+$__System.registerDynamic("d", ["b", "e", "f", "10", "11", "12", "14", "15", "16", "2", "17", "19", "1d", "21", "1e", "1f", "22", "24", "25", "1a", "1b", "26", "27", "18", "28"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -23872,19 +23873,19 @@ $__System.registerDynamic("d", ["b", "e", "f", "10", "11", "12", "14", "15", "16
   exports.SpNewTagModal = sp_new_tag_modal_1.SpNewTagModal;
   var sp_tag_select_control_1 = $__require('19');
   exports.SpTagSelectControl = sp_tag_select_control_1.SpTagSelectControl;
-  var base_model_1 = $__require('25');
+  var base_model_1 = $__require('1d');
   exports.BaseModel = base_model_1.BaseModel;
-  var checkpoint_model_1 = $__require('20');
+  var checkpoint_model_1 = $__require('21');
   exports.CheckpointModel = checkpoint_model_1.CheckpointModel;
-  var tag_model_1 = $__require('1d');
+  var tag_model_1 = $__require('1e');
   exports.TagModel = tag_model_1.TagModel;
-  var tier_model_1 = $__require('1e');
+  var tier_model_1 = $__require('1f');
   exports.TierModel = tier_model_1.TierModel;
-  var checkpoint_page_1 = $__require('21');
+  var checkpoint_page_1 = $__require('22');
   exports.CheckpointPage = checkpoint_page_1.CheckpointPage;
-  var learn_page_1 = $__require('23');
+  var learn_page_1 = $__require('24');
   exports.LearnPage = learn_page_1.LearnPage;
-  var teach_page_1 = $__require('24');
+  var teach_page_1 = $__require('25');
   exports.TeachPage = teach_page_1.TeachPage;
   var checkpoint_service_1 = $__require('1a');
   exports.CheckpointService = checkpoint_service_1.CheckpointService;
