@@ -83,29 +83,39 @@ export class SpTagSelectControl {
          switch (changedTagTier) {
                 case 1:
                     this.selectedTier2Tag.parent = this.selectedTier1Tag;
-                    // this.selectedTier2Tag.key = undefined;
-                    // this.selectedTier3Tag.key = undefined;
-                    // this.selectedTier4Tag.key = undefined;
+                    this.selectedTier2Tag.key = undefined;
+                    this.selectedTier3Tag.key = undefined;
+                    this.selectedTier4Tag.key = undefined;
                     this.tier2Tags = newTags;
                     this.tier3Tags = [];
                     this.tier4Tags = [];
                     break;
                 case 2:
                     this.selectedTier3Tag.parent = this.selectedTier2Tag; 
-                    // this.selectedTier3Tag.key = undefined;
-                    // this.selectedTier4Tag.key = undefined;
+                    this.selectedTier3Tag.key = undefined;
+                    this.selectedTier4Tag.key = undefined;
                     this.tier3Tags = newTags;
                     this.tier4Tags = [];
                     break;
                 case 3:
                     this.selectedTier4Tag.parent = this.selectedTier3Tag; 
-                    // this.selectedTier4Tag.key = undefined;
+                    this.selectedTier4Tag.key = undefined;
                     this.tier4Tags = newTags;
                     break;
                 case 4:
                 default:
                     break;
         }
+    }
+
+    getDropdownClasses() {
+        if (this.vertical)
+            return ['col', 's5', 'offset-s1'];
+    }
+
+    getAddTagClasses() {
+        if (this.vertical)
+            return ['col', 's4'];
     }
 
 

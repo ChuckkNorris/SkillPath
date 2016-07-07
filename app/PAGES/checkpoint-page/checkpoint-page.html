@@ -1,4 +1,4 @@
 <div *ngIf="checkpoint">
-    <h1 >{{checkpoint.name}}</h1>
+    <h1 *ngIf="checkpoint">{{checkpoint.name}}</h1>
     <iframe [src]="checkpoint.tutorialUrl"></iframe>
 </div>

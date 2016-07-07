@@ -8,7 +8,7 @@ import {TagService} from '../../SERVICES/tag.service';
     selector: 'sp-new-tag-modal',
     template: `
   <!-- Modal Trigger -->
-  <a class="waves-effect waves-light btn modal-trigger" (click)="showTagModal();">Add New Tag</a>
+  <a class="waves-effect waves-light btn modal-trigger" (click)="showTagModal();">+ Tag</a>
 
   <!-- Modal Structure -->
   <div id="{{id}}" class="modal">
